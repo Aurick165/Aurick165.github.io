@@ -56,7 +56,7 @@ education:
     institution: Bangladesh University of Engineering and Technology
     date_start: 2018-03-31
     date_end: 2023-05-27
-    summary: 
+    summary: |
 
     button:
       text: 
@@ -65,7 +65,7 @@ education:
     institution: Bangladesh University of Engineering and Technology
     date_start: 2023-07-01
     date_end: 
-    summary: 
+    summary: |
       
 
       Courses included:
@@ -76,7 +76,7 @@ education:
     institution: 
     date_start: 
     date_end: 
-    summary: 
+    summary: |
       
       
       Courses included:
