@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aurick Das — Ph.D. Researcher · ReRAM & Analog In-Memory Computing</title>
+<meta name="description" content="Aurick Das — Ph.D. researcher in Electrical Engineering at Arizona State University. TaOx ReRAM characterization, COMSOL electrothermal modeling, analog in-memory computing, GaN HEMT TCAD." />
+<meta property="og:title" content="Aurick Das — Academic Portfolio" />
+<meta property="og:description" content="ReRAM · Analog In-Memory Computing · TCAD — Ph.D. researcher at Arizona State University." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #F6F8F7; --panel: #FFFFFF; --ink: #1A2422; --slate: #5C6B73;
+    --copper: #A65E2E; --copper-deep: #8A4A20; --cool: #4E6E7E; --hairline: #DFE5E2;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Archivo', system-ui, sans-serif; line-height: 1.6; margin: 0; }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  a:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; border-radius: 2px; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  .nav { display: flex; justify-content: space-between; align-items: center; padding: 26px 0; border-bottom: 1px solid var(--hairline); flex-wrap: wrap; gap: 10px; }
+  .nav .brand { font-weight: 600; letter-spacing: .02em; }
+  .nav a { color: var(--slate); text-decoration: none; font-size: 13px; margin-left: 20px; }
+  .nav a:first-child { margin-left: 0; }
+  .nav a:hover { color: var(--copper); }
+
+  .hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; padding: 68px 0 60px; }
+  .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .12em; color: var(--copper-deep); text-transform: uppercase; }
+  h1 { font-size: clamp(42px, 6.5vw, 72px); line-height: 1.02; margin: 14px 0 6px; font-weight: 700; font-variation-settings: 'wdth' 78; letter-spacing: -0.01em; }
+  .role { color: var(--slate); font-size: 17px; margin: 0 0 4px; }
+  .group { color: var(--slate); font-size: 14px; margin: 0; }
+  .tagline { margin-top: 22px; font-size: 17.5px; max-width: 54ch; }
+  .hero-cta { margin-top: 28px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn { font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 11px 18px; border-radius: 3px; text-decoration: none; border: 1px solid var(--copper); }
+  .btn.solid { background: var(--copper); color: #fff; }
+  .btn.solid:hover { background: var(--copper-deep); }
+  .btn.ghost { color: var(--copper-deep); }
+  .btn.ghost:hover { background: #F1E7DF; }
+
+  .fig { background: var(--panel); border: 1px solid var(--hairline); border-radius: 6px; padding: 18px 18px 8px; margin: 0; }
+  .fig figcaption { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--slate); padding: 6px 4px 10px; }
+  .hyst { width: 100%; height: auto; display: block; }
+  .hyst .grid { stroke: #EDF1EF; }
+  .hyst .axis { stroke: #B9C2BE; stroke-width: 1.2; }
+  .hyst .axlbl { font-family: 'IBM Plex Mono', monospace; font-size: 13px; fill: var(--slate); }
+  .hyst .branch { fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-dasharray: 620; stroke-dashoffset: 620; transition: stroke-dashoffset 1.8s cubic-bezier(.4,0,.2,1); }
+  .hyst .branch.drawn { stroke-dashoffset: 0; }
+  @media (prefers-reduced-motion: reduce) { .hyst .branch { transition: none; stroke-dashoffset: 0; } }
+  .hyst .set { stroke: var(--copper); }
+  .hyst .reset { stroke: var(--cool); }
+  .hyst .lbl { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .08em; }
+  .hyst .set-lbl { fill: var(--copper-deep); }
+  .hyst .reset-lbl { fill: var(--cool); }
+  .hyst .origin { fill: var(--ink); }
+
+  section { padding: 54px 0; border-top: 1px solid var(--hairline); }
+  .sec-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 30px; }
+  h2 { font-size: 25px; font-weight: 650; font-variation-settings: 'wdth' 84; margin: 0; }
+  .sec-note { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--slate); }
+
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .card { background: var(--panel); border: 1px solid var(--hairline); border-radius: 6px; padding: 22px; display: flex; flex-direction: column; }
+  .card .id { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--copper-deep); letter-spacing: .1em; }
+  .card h3 { font-size: 18px; margin: 10px 0 8px; font-weight: 600; }
+  .card p { font-size: 14.5px; color: #37423F; margin: 0 0 16px; flex: 1; }
+  .card .tag { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--slate); border-top: 1px solid var(--hairline); padding-top: 12px; }
+
+  .rows .row { display: grid; grid-template-columns: 190px 1fr; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--hairline); }
+  .rows .row:last-child { border-bottom: none; }
+  .row .meta { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--slate); padding-top: 4px; }
+  .row h3 { font-size: 16.5px; margin: 0 0 6px; font-weight: 600; }
+  .row p { font-size: 14.5px; color: #37423F; margin: 0; }
+
+  .publist { counter-reset: pub; list-style: none; margin: 0; padding: 0; }
+  .publist li { counter-increment: pub; display: grid; grid-template-columns: 44px 1fr; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--hairline); }
+  .publist li:last-child { border-bottom: none; }
+  .publist li::before { content: "[" counter(pub, decimal-leading-zero) "]"; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--copper-deep); padding-top: 3px; }
+  .pub-title { font-size: 15.5px; font-weight: 600; margin: 0 0 3px; }
+  .pub-authors { font-size: 13.5px; color: #37423F; margin: 0 0 3px; }
+  .pub-venue { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--slate); }
+  h2.sub { font-size: 19px; margin-top: 40px; }
+
+  .skills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .skill { background: var(--panel); border: 1px solid var(--hairline); border-radius: 6px; padding: 18px 20px; }
+  .skill h3 { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--copper-deep); margin: 0 0 8px; }
+  .skill p { font-size: 14px; color: #37423F; margin: 0; }
+
+  footer { border-top: 1px solid var(--hairline); padding: 46px 0 60px; }
+  .foot { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
+  .foot .email { font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: var(--copper-deep); text-decoration: none; }
+  .foot .email:hover { text-decoration: underline; }
+  .foot nav a { display: block; color: var(--slate); text-decoration: none; font-size: 13px; margin-bottom: 6px; }
+  .foot nav a:hover { color: var(--copper); }
+  .foot .loc { margin: 6px 0 0; font-size: 13px; color: var(--slate); }
+  .fine { margin-top: 34px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9AA6A2; }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; padding: 44px 0 36px; }
+    .cards, .skills { grid-template-columns: 1fr; }
+    .rows .row { grid-template-columns: 1fr; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="nav">
+    <span class="brand">Aurick Das</span>
+    <nav aria-label="Primary">
+      <a href="#research">Research</a>
+      <a href="#pubs">Publications</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#awards">Awards</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div>
+        <span class="eyebrow">ReRAM · Analog In-Memory Computing · TCAD</span>
+        <h1>Aurick Das</h1>
+        <p class="role">Ph.D. Researcher · Electrical Engineering</p>
+        <p class="group">Dr. Marinella Research Group · Arizona State University</p>
+        <p class="tagline">I work on resistive switching memory and analog in-memory computing — from probe-station measurements of TaOx ReRAM devices to electrothermal models of the filaments inside them. Before ASU, I spent several years in TCAD, machine-learning-driven device design, and GaN power &amp; RF electronics.</p>
+        <div class="hero-cta">
+          <a class="btn solid" href="#research">See my research</a>
+          <a class="btn ghost" href="mailto:aurick2023@gmail.com">Get in touch</a>
+        </div>
+      </div>
+      <figure class="fig">
+        <svg viewBox="0 0 420 420" class="hyst" role="img" aria-label="Pinched hysteresis current–voltage loop of a memristor">
+          <g class="gridlines"></g>
+          <line x1="30" y1="210" x2="390" y2="210" class="axis" />
+          <line x1="210" y1="30" x2="210" y2="390" class="axis" />
+          <text x="378" y="200" class="axlbl">V</text>
+          <text x="220" y="44" class="axlbl">I</text>
+          <path id="setBranch" class="branch set" d="M 210 210 C 260 206, 296 198, 328 132 C 344 98, 352 76, 340 68 C 326 60, 306 92, 284 124 C 258 160, 234 192, 210 210" />
+          <path id="resetBranch" class="branch reset" d="M 210 210 C 160 214, 124 222, 92 288 C 76 322, 68 344, 80 352 C 94 360, 114 328, 136 296 C 162 260, 186 228, 210 210" />
+          <text x="300" y="58" class="lbl set-lbl">SET</text>
+          <text x="64" y="376" class="lbl reset-lbl">RESET</text>
+          <circle cx="210" cy="210" r="3.5" class="origin" />
+        </svg>
+        <figcaption>Fig. 1 — Pinched hysteresis I–V loop, bipolar resistive switching</figcaption>
+      </figure>
+    </div>
+
+    <section id="research">
+      <div class="sec-head">
+        <h2>Current research</h2>
+        <span class="sec-note">Arizona State University · 2025 – present</span>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <span class="id">R.01</span>
+          <h3>1T1R ReRAM Characterization</h3>
+          <p>SET/RESET cycling of TaOx-based 1T1R devices on a Keysight B1500, moving from compliance-limited to transistor-saturation-limited current control to shape filament formation and widen the memory window.</p>
+          <span class="tag">Keysight B1500 · Python</span>
+        </article>
+        <article class="card">
+          <span class="id">R.02</span>
+          <h3>Electrothermal Filament Modeling</h3>
+          <p>COMSOL simulation of filament temperature during switching — thermal boundary conductance calibration and interface / vertical-cutline temperature profiles for IEDM-style reporting.</p>
+          <span class="tag">COMSOL · matplotlib</span>
+        </article>
+        <article class="card">
+          <span class="id">R.03</span>
+          <h3>Analog In-Memory Computing</h3>
+          <p>Multi-level conductance targeting, write-verify protocols, and bit-slice crossbar architectures — connecting device-level nonidealities to system-level accuracy.</p>
+          <span class="tag">MLC · CrossSim · DTCO</span>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <h2>Prior research</h2>
+        <span class="sec-note">BUET &amp; collaborations · 2021 – 2025</span>
+      </div>
+      <div class="rows">
+        <article class="row">
+          <span class="meta">2024 – 2025 · BUET</span>
+          <div>
+            <h3>III-Nitride Electronic Devices — ML-driven design</h3>
+            <p>Combined NSGA-II multi-objective optimization with neural networks over 472 TCAD-simulated AlGaN/GaN HEMT structures to maximize breakdown voltage while minimizing gate leakage and current collapse; parameter-variation studies in Sentaurus in collaboration with an international semiconductor foundry, plus ML-based compact modeling and field-plate studies for RF devices.</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">2023 – 2025 · BUET</span>
+          <div>
+            <h3>Silicon Power Devices — LDMOS &amp; SOI-LDMOS</h3>
+            <p>TCAD thermal analysis of junction temperature and leakage in LDMOS vs. SOI-LDMOS, Baliga figure-of-merit benchmarking of Ron,sp against breakdown voltage, COMSOL verification of thermal RC against analytical models, and rapid inverse design of field-plate LDMOS for BV / Ron,sp co-optimization.</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">2024 – 2025</span>
+          <div>
+            <h3>Neural Networks for TCAD Acceleration</h3>
+            <p>cGAN-based augmentation of Sentaurus TCAD image datasets and stable-diffusion generation of TDR images for AlGaN/GaN HEMTs, bypassing expensive physics simulations for device design loops.</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">2024 – 2025</span>
+          <div>
+            <h3>Radiation Effects in 3 nm CFET</h3>
+            <p>Sentaurus TCAD study of total ionizing dose (TID) effects on CFET technology at the 3 nm node.</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">2021 – 2022 · BUET</span>
+          <div>
+            <h3>Machine Learning &amp; Signal Processing</h3>
+            <p>Human sleeping-pose estimation from long-wave IR images for in-bed patient monitoring, and PSD-based optimization of Intelligent Reflecting Surface (IRS) configurations.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="pubs">
+      <div class="sec-head"><h2>Publications</h2></div>
+      <ol class="publist">
+        <li><div>
+          <p class="pub-title">TCAD Evaluation of an Asymmetric Multi-finger AlGaN/GaN HEMT for High Linearity RF Application</p>
+          <p class="pub-authors">T. Hossain, R. H. Palash, <strong>A. Das</strong>, B. Sikder, T. Srimani, N. Chowdhury</p>
+          <span class="pub-venue">SISPAD 2024</span>
+        </div></li>
+        <li><div>
+          <p class="pub-title">Human Sleeping Pose Estimation from IR Images for In-bed Patient Monitoring Using Image Processing and Deep Learning</p>
+          <p class="pub-authors">S. K. Nahin, S. Acharjee, <strong>A. Das</strong>, S. Saha, S. Hossain, M. A. Haque</p>
+          <span class="pub-venue">Heliyon</span>
+        </div></li>
+        <li><div>
+          <p class="pub-title">Inverse Design of AlGaN/GaN HEMT RF Device with Source Connected Field Plate</p>
+          <p class="pub-authors"><strong>A. Das</strong>, S. R. Arnab, X. Xiang, T. Hossain, R. H. Palash, B. Sikder, E. Yagyu, M. Nakamura, K. H. Teo, N. Chowdhury</p>
+          <span class="pub-venue">Advanced Theory and Simulations</span>
+        </div></li>
+        <li><div>
+          <p class="pub-title">Dynamically Tunable Physically Unclonable Functions for Electro-Optic Photonic Systems</p>
+          <p class="pub-authors">P. Agnihotri, <strong>A. Das</strong></p>
+          <span class="pub-venue">IEEE VLSI Test Symposium</span>
+        </div></li>
+        <li><div>
+          <p class="pub-title">Vernier-Based Self-Referencing Test Cell for Silicon Photonic Ring Resonators</p>
+          <p class="pub-authors">P. Agnihotri, <strong>A. Das</strong>, J. Plusquellic</p>
+          <span class="pub-venue">IEEE VLSI Test Symposium</span>
+        </div></li>
+      </ol>
+
+      <div class="sec-head"><h2 class="sub">Under review / in preparation</h2></div>
+      <ol class="publist">
+        <li><div>
+          <p class="pub-title">A TCAD-based Study on the TID Impact on 3 nm CFET Technology</p>
+          <p class="pub-authors"><strong>A. Das</strong>, M. N. H. Shazon</p>
+        </div></li>
+        <li><div>
+          <p class="pub-title">Physics-inspired Neural Networks for Bypassing TCAD-based Current Density Profiles for GaN HEMT RF Devices</p>
+          <p class="pub-authors"><strong>A. Das</strong>, M. Islam, N. Chowdhury</p>
+        </div></li>
+        <li><div>
+          <p class="pub-title">Rapid Inverse Design of LDMOS with Field Plate Structure for BV and Ron,sp Co-Optimization</p>
+          <p class="pub-authors"><strong>A. Das</strong>, S. R. Arnab, K. Chowdhury, N. Chowdhury</p>
+        </div></li>
+      </ol>
+    </section>
+
+    <section id="experience">
+      <div class="sec-head"><h2>Industry experience</h2></div>
+      <div class="rows">
+        <article class="row">
+          <span class="meta">Sep 2023 – 2025</span>
+          <div>
+            <h3>TCAD Engineer — Neural Semiconductor Limited</h3>
+            <p>Designed gate-stack and field-plate technologies for AlGaN/GaN HEMT power devices in Sentaurus TCAD for an international foundry; compact modeling of experimental RF and power device data in ADS / IC-CAP; GDS-mask-driven RF device design; COMSOL modeling of Mg diffusion profiles and thermal RC; trap, kink-effect, and leakage analysis; comparative LDMOS (BCD vs. BCD-SOI) studies.</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">Dec 2022 – Mar 2023</span>
+          <div>
+            <h3>Intern — Ulkasemi Pvt. Limited</h3>
+            <p>Analog design and RTL: high-precision op-amp in gpdk090 (Cadence Virtuoso) and an SPI protocol implementation from scratch in Verilog/SystemVerilog.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="sec-head"><h2>Education</h2></div>
+      <div class="rows">
+        <article class="row">
+          <span class="meta">2025 – Present</span>
+          <div>
+            <h3>Ph.D., Electrical Engineering</h3>
+            <p>Arizona State University · GPA 4.14 / 4.0</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">2023 – 2025</span>
+          <div>
+            <h3>M.Sc., Electrical &amp; Electronic Engineering</h3>
+            <p>Bangladesh University of Engineering and Technology (BUET) · CGPA 3.92 / 4.0</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">2018 – 2023</span>
+          <div>
+            <h3>B.Sc., Electrical &amp; Electronic Engineering</h3>
+            <p>Bangladesh University of Engineering and Technology (BUET) · CGPA 3.67 / 4.0</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="awards">
+      <div class="sec-head"><h2>Awards &amp; competitions</h2></div>
+      <div class="rows">
+        <article class="row">
+          <span class="meta">ICIP 2021 · Alaska, USA</span>
+          <div>
+            <h3>1st Place — IEEE Video and Image Processing Cup</h3>
+            <p>Team Samaritan won first place among 50+ university teams worldwide ($5,000 prize) with an in-bed human keypoint and pose detection system from LWIR images under adverse lighting and covered conditions.</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">2021</span>
+          <div>
+            <h3>15th Worldwide — IEEE Signal Processing Cup</h3>
+            <p>Optimized Intelligent Reflecting Surface configurations via power spectral density analysis; ranked 15th of 50 teams.</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">2022 · Dhaka</span>
+          <div>
+            <h3>Top 10 — Robi Datathon 2.0</h3>
+            <p>Top 10 of 358 participants; large-scale tabular analysis and geospatial work with GeoPandas.</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">Academic</span>
+          <div>
+            <h3>Dean's Honor List &amp; Merit Scholarships</h3>
+            <p>Dean's Honor List at BUET; merit scholarships in SSC and HSC examinations.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><h2>Skills &amp; tools</h2></div>
+      <div class="skills">
+        <div class="skill">
+          <h3>Device &amp; EDA</h3>
+          <p>Sentaurus TCAD · COMSOL Multiphysics · Cadence Virtuoso · Innovus · ADS · IC-CAP · Ansys HFSS / Q3D / Icepak / Lumerical / EDT</p>
+        </div>
+        <div class="skill">
+          <h3>Measurement</h3>
+          <p>Keysight B1500 · 1T1R ReRAM characterization · SET/RESET cycling · write-verify protocols</p>
+        </div>
+        <div class="skill">
+          <h3>Languages</h3>
+          <p>Python · C/C++ · Verilog · SystemVerilog · MATLAB · HTML · Arduino</p>
+        </div>
+        <div class="skill">
+          <h3>Workflow</h3>
+          <p>Git/GitHub · Unix shell · VS Code · Simulink · Proteus · OrCAD / PSpice</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="foot">
+      <div>
+        <span class="eyebrow">Contact</span>
+        <p style="margin:10px 0 0"><a class="email" href="mailto:aurick2023@gmail.com">aurick2023@gmail.com</a></p>
+        <p class="loc">Tempe, Arizona</p>
+      </div>
+      <nav aria-label="External links">
+        <a href="https://github.com/Aurick165" target="_blank" rel="noreferrer">GitHub ↗</a>
+        <a href="https://linkedin.com/in/aurick-das-92582a176/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+        <a href="https://sites.google.com/view/auricktest165" target="_blank" rel="noreferrer">Google Sites ↗</a>
+      </nav>
+    </div>
+    <p class="fine">© 2026 Aurick Das · Tempe, AZ</p>
+  </footer>
+
+</div>
+
+<script>
+  // Analyzer-style grid lines
+  (function () {
+    var g = document.querySelector(".gridlines");
+    [70, 140, 210, 280, 350].forEach(function (p) {
+      ["v", "h"].forEach(function (dir) {
+        var l = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        if (dir === "v") { l.setAttribute("x1", p); l.setAttribute("y1", 30); l.setAttribute("x2", p); l.setAttribute("y2", 390); }
+        else { l.setAttribute("x1", 30); l.setAttribute("y1", p); l.setAttribute("x2", 390); l.setAttribute("y2", p); }
+        l.setAttribute("class", "grid");
+        g.appendChild(l);
+      });
+    });
+    // Draw the hysteresis branches on load
+    requestAnimationFrame(function () {
+      setTimeout(function () {
+        document.getElementById("setBranch").classList.add("drawn");
+        document.getElementById("resetBranch").classList.add("drawn");
+      }, 150);
+    });
+  })();
+</script>
+</body>
+</html>
