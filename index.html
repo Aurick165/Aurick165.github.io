@@ -150,9 +150,9 @@
         <span class="eyebrow">Analog In-Memory Computing · Memory Devices · Analog Mixed Signal · Neuromorphic Computing</span>
         <h1>Aurick Das</h1>
         <p class="role">Ph.D. Researcher · Electrical Engineering</p>
-        <p class="group">Dr. Marinella Research Group · Arizona State University</p>
+        <p class="group"> Arizona State University</p>
         <p class="tagline">Two problems wear the same face in my research: making AI accelerators efficient enough to run at the edge of a satellite, and making them survive the environment they'd be flying through. My Ph.D. work at Arizona State University, in Dr. Matthew Marinella's group, lives at that intersection — radiation-hardened analog AI accelerators built on resistive memory, for space platforms and for data centers where energy has become the binding constraint.</p>
-        <p class="tagline">What I bring to it is a device-physics foundation built at BUET and carried forward: TCAD modeling of compound-semiconductor and advanced-node devices, ML-driven optimization for inverse device design, and radiation-effects analysis that runs from TCAD through circuit simulation in Cadence and HSPICE. Different devices, same instinct — understand the physics first, then decide what you're allowed to abstract away.</p>
+        <p class="tagline">What I bring to it is a device-physics foundation and carried forward: TCAD modeling of compound-semiconductor and advanced-node devices, ML-driven optimization for inverse device design, and radiation-effects analysis that runs from TCAD through circuit simulation. Different devices and analog circuits, same instinct — understand the physics and math first, then decide what are allowed to abstract away.</p>
         <div class="hero-cta">
           <a class="btn solid" href="#research">See my research</a>
           <a class="btn ghost" href="mailto:aurick2023@gmail.com">Get in touch</a>
@@ -171,7 +171,7 @@
           <text x="64" y="376" class="lbl reset-lbl">RESET</text>
           <circle cx="210" cy="210" r="3.5" class="origin" />
         </svg>
-        <figcaption>Fig. 1 — Pinched hysteresis I–V loop, bipolar resistive switching</figcaption>
+        <figcaption> Hysteresis I–V loop for bipolar resistive switching</figcaption>
       </figure>
     </div>
 
@@ -454,7 +454,7 @@
     </div>
 
     <h3>What this work is about</h3>
-    <p>In a 1T1R cell, the access transistor is more than a selector — biased correctly, it becomes a fast, local current limiter that responds far quicker than an instrument's compliance loop. This work characterizes TaOx-based devices on a Keysight B1500 semiconductor parameter analyzer, moving from SMU-compliance-limited operation to transistor-saturation-limited control, where a low word-line voltage during SET caps the filament's growth current and a high word-line voltage during RESET lets the cell draw what it needs to dissolve the filament.</p>
+    <p>In a 1T1R cell, the access transistor is more than a selector — biased correctly, it becomes a fast, local current limiter that responds far quicker than an instrument's compliance loop. This work characterizes TaOx-based devices on a Keysight B1500 semiconductor parameter analyzer, a transistor-saturation-limited control, where a low word-line voltage during SET caps the filament's growth current and a high word-line voltage during RESET lets the cell draw what it needs to dissolve the filament.</p>
     <h3>Methods</h3>
     <p>Forming, quasi-static I–V sweeps, and pulsed SET/RESET cycling across multiple device samples; a Python measurement framework automates sweep sequences, SET-detection thresholds, and data logging, enabling systematic studies of memory window, switching variability, and endurance as a function of programming conditions.</p>
   </section>
@@ -488,7 +488,7 @@
           <text x="78" y="120" class="svgl2">T<tspan baseline-shift="sub" font-size="8">peak</tspan> ~ core</text>
           <text x="60" y="246" class="svgl">Joule heating concentrates in the filament constriction</text>
         </svg>
-        <figcaption>Fig. A — Conductive filament with Joule-heated core and thermal spreading contours.</figcaption>
+        <figcaption> Conductive filament with Joule-heated core and thermal spreading contours.</figcaption>
       </figure>
       <figure class="dfig">
         <svg viewBox="0 0 360 260" role="img" aria-label="Temperature versus position along a vertical cutline through the filament, peaking at the core">
@@ -502,14 +502,14 @@
           <text x="150" y="66" class="svgl2">T at filament core</text>
           <text x="46" y="246" class="svgl">TBC at electrode interfaces shapes the falloff</text>
         </svg>
-        <figcaption>Fig. B — Temperature along the vertical cutline: peak at the core, interface-limited decay.</figcaption>
+        <figcaption> Temperature peak at the core of filament </figcaption>
       </figure>
     </div>
 
     <h3>What this work is about</h3>
     <p>Resistive switching is a thermal event as much as an electrical one: the filament's temperature during SET and RESET governs ion migration, retention, and variability. This work builds coupled electrothermal finite-element models of TaOx filaments in COMSOL Multiphysics, calibrating thermal boundary conductance at the electrode interfaces and extracting interface and vertical-cutline temperature profiles across parametric studies of bias, filament geometry, and composition.</p>
     <h3>Why it matters</h3>
-    <p>Knowing the filament's temperature field — which cannot be measured directly at these scales — connects programming conditions to the microscopic physics, guiding both device engineering and the compact models used at circuit level. The simulation results feed directly into publication-quality figure pipelines targeting IEDM-style reporting.</p>
+    <p> Heat doesn't respect cell boundaries. In a dense crossbar array, thermal energy generated in one filament doesn't stay contained — it conducts outward through the oxide stack, bleeds into neighboring electrodes, and can silently disturb the resistance state of adjacent, unselected cells. This is thermal crosstalk, and it's one of the most insidious scalability bottlenecks facing ReRAM as arrays shrink and densities climb.</p>
   </section>
 
   <section class="detail" id="detail-r03" hidden>
@@ -539,7 +539,7 @@
           <text x="244" y="222" class="svgl2">ΣI</text>
           <text x="34" y="246" class="svgl">I = G·V at every cross-point; columns sum by Kirchhoff</text>
         </svg>
-        <figcaption>Fig. A — Crossbar MVM: conductances store weights, physics does the multiply-accumulate.</figcaption>
+        <figcaption> Crossbar MVM: conductances store weights.</figcaption>
       </figure>
       <figure class="dfig">
         <svg viewBox="0 0 360 260" role="img" aria-label="Multi-level conductance states shown as a staircase of target levels with write-verify convergence">
@@ -556,7 +556,7 @@
           <text x="208" y="152" class="svgl2">write-verify</text>
           <text x="46" y="246" class="svgl">Discrete conductance targets; bit-slicing relaxes precision per device</text>
         </svg>
-        <figcaption>Fig. B — Conductance levels reached by iterative write-verify programming.</figcaption>
+        <figcaption> Conductance levels reached by iterative write-verify programming.</figcaption>
       </figure>
     </div>
 
