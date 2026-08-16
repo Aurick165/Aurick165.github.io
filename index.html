@@ -33,7 +33,8 @@
   h1 { font-size: clamp(42px, 6.5vw, 72px); line-height: 1.02; margin: 14px 0 6px; font-weight: 700; font-variation-settings: 'wdth' 78; letter-spacing: -0.01em; }
   .role { color: var(--slate); font-size: 17px; margin: 0 0 4px; }
   .group { color: var(--slate); font-size: 14px; margin: 0; }
-  .tagline { margin-top: 22px; font-size: 17.5px; max-width: 54ch; }
+  .tagline { margin-top: 18px; font-size: 16.5px; max-width: 58ch; }
+  .tagline + .tagline { margin-top: 14px; }
   .hero-cta { margin-top: 28px; display: flex; gap: 14px; flex-wrap: wrap; }
   .btn { font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 11px 18px; border-radius: 3px; text-decoration: none; border: 1px solid var(--copper); }
   .btn.solid { background: var(--copper); color: #fff; }
@@ -123,11 +124,12 @@
   <main>
     <div class="hero">
       <div>
-        <span class="eyebrow">ReRAM · Analog In-Memory Computing · TCAD</span>
+        <span class="eyebrow">Analog In-Memory Computing · Memory Devices · Analog Mixed Signal · Neuromorphic Computing</span>
         <h1>Aurick Das</h1>
         <p class="role">Ph.D. Researcher · Electrical Engineering</p>
         <p class="group">Dr. Marinella Research Group · Arizona State University</p>
-        <p class="tagline">I work on resistive switching memory and analog in-memory computing — from probe-station measurements of TaOx ReRAM devices to electrothermal models of the filaments inside them. Before ASU, I spent several years in TCAD, machine-learning-driven device design, and GaN power &amp; RF electronics.</p>
+        <p class="tagline">Two problems wear the same face in my research: making AI accelerators efficient enough to run at the edge of a satellite, and making them survive the environment they'd be flying through. My Ph.D. work at Arizona State University, in Dr. Matthew Marinella's group, lives at that intersection — radiation-hardened analog AI accelerators built on resistive memory, for space platforms and for data centers where energy has become the binding constraint.</p>
+        <p class="tagline">What I bring to it is a device-physics foundation built at BUET and carried forward: TCAD modeling of compound-semiconductor and advanced-node devices, ML-driven optimization for inverse device design, and radiation-effects analysis that runs from TCAD through circuit simulation in Cadence and HSPICE. Different devices, same instinct — understand the physics first, then decide what you're allowed to abstract away.</p>
         <div class="hero-cta">
           <a class="btn solid" href="#research">See my research</a>
           <a class="btn ghost" href="mailto:aurick2023@gmail.com">Get in touch</a>
