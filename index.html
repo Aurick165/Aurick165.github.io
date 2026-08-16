@@ -70,6 +70,28 @@
   .card p { font-size: 14.5px; color: #37423F; margin: 0 0 16px; flex: 1; }
   .card .tag { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--slate); border-top: 1px solid var(--hairline); padding-top: 12px; }
 
+  /* interactive research cards */
+  a.card { text-decoration: none; color: inherit; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+  a.card:hover, a.card:focus-visible { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,36,34,.08); border-color: var(--copper); }
+  .card .more { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--copper-deep); margin-top: 10px; }
+  a.card:hover .more { text-decoration: underline; }
+
+  /* research detail views */
+  .detail { padding: 48px 0 64px; }
+  .detail .back { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--copper-deep); text-decoration: none; }
+  .detail .back:hover { text-decoration: underline; }
+  .detail h2 { font-size: 34px; margin: 14px 0 4px; }
+  .detail .lede { font-size: 18px; color: #2A3532; max-width: 62ch; margin: 12px 0 8px; }
+  .detail h3 { font-size: 18px; font-weight: 650; margin: 30px 0 8px; }
+  .detail p { font-size: 15px; color: #37423F; max-width: 72ch; }
+  .figrow { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 28px 0 6px; }
+  .dfig { background: var(--panel); border: 1px solid var(--hairline); border-radius: 6px; padding: 16px 16px 6px; margin: 0; }
+  .dfig svg { width: 100%; height: auto; display: block; }
+  .dfig figcaption { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--slate); padding: 8px 4px 10px; }
+  @media (max-width: 860px) { .figrow { grid-template-columns: 1fr; } }
+  .svgl { font-family: 'IBM Plex Mono', monospace; font-size: 11px; fill: var(--slate); }
+  .svgl2 { font-family: 'IBM Plex Mono', monospace; font-size: 11px; fill: var(--copper-deep); }
+
   .rows .row { display: grid; grid-template-columns: 190px 1fr; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--hairline); }
   .rows .row:last-child { border-bottom: none; }
   .row .meta { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--slate); padding-top: 4px; }
@@ -122,14 +144,15 @@
   </header>
 
   <main>
+  <div id="home">
     <div class="hero">
       <div>
         <span class="eyebrow">Analog In-Memory Computing · Memory Devices · Analog Mixed Signal · Neuromorphic Computing</span>
         <h1>Aurick Das</h1>
         <p class="role">Ph.D. Researcher · Electrical Engineering</p>
-        <p class="group"> Arizona State University</p>
+        <p class="group">Dr. Marinella Research Group · Arizona State University</p>
         <p class="tagline">Two problems wear the same face in my research: making AI accelerators efficient enough to run at the edge of a satellite, and making them survive the environment they'd be flying through. My Ph.D. work at Arizona State University, in Dr. Matthew Marinella's group, lives at that intersection — radiation-hardened analog AI accelerators built on resistive memory, for space platforms and for data centers where energy has become the binding constraint.</p>
-        <p class="tagline">What I bring to it is a device-physics foundation and carried forward: TCAD modeling of compound-semiconductor and advanced-node devices, ML-driven optimization for inverse device design, and radiation-effects analysis that runs from TCAD through circuit simulation. Different devices and circuits, same instinct: Understand the physics and math first, then decide what are allowed to abstract away.</p>
+        <p class="tagline">What I bring to it is a device-physics foundation built at BUET and carried forward: TCAD modeling of compound-semiconductor and advanced-node devices, ML-driven optimization for inverse device design, and radiation-effects analysis that runs from TCAD through circuit simulation in Cadence and HSPICE. Different devices, same instinct — understand the physics first, then decide what you're allowed to abstract away.</p>
         <div class="hero-cta">
           <a class="btn solid" href="#research">See my research</a>
           <a class="btn ghost" href="mailto:aurick2023@gmail.com">Get in touch</a>
@@ -148,7 +171,7 @@
           <text x="64" y="376" class="lbl reset-lbl">RESET</text>
           <circle cx="210" cy="210" r="3.5" class="origin" />
         </svg>
-        <figcaption>  I–V loop for bipolar resistive switching</figcaption>
+        <figcaption>Fig. 1 — Pinched hysteresis I–V loop, bipolar resistive switching</figcaption>
       </figure>
     </div>
 
@@ -158,24 +181,27 @@
         <span class="sec-note">Arizona State University · 2025 – present</span>
       </div>
       <div class="cards">
-        <article class="card">
+        <a class="card" href="#r01">
           <span class="id">R.01</span>
           <h3>1T1R ReRAM Characterization</h3>
           <p>SET/RESET cycling of TaOx-based 1T1R devices on a Keysight B1500, moving from compliance-limited to transistor-saturation-limited current control to shape filament formation and widen the memory window.</p>
           <span class="tag">Keysight B1500 · Python</span>
-        </article>
-        <article class="card">
+          <span class="more">Read details →</span>
+        </a>
+        <a class="card" href="#r02">
           <span class="id">R.02</span>
           <h3>Electrothermal Filament Modeling</h3>
           <p>COMSOL simulation of filament temperature during switching — thermal boundary conductance calibration and interface / vertical-cutline temperature profiles for IEDM-style reporting.</p>
           <span class="tag">COMSOL · matplotlib</span>
-        </article>
-        <article class="card">
+          <span class="more">Read details →</span>
+        </a>
+        <a class="card" href="#r03">
           <span class="id">R.03</span>
           <h3>Analog In-Memory Computing</h3>
           <p>Multi-level conductance targeting, write-verify protocols, and bit-slice crossbar architectures — connecting device-level nonidealities to system-level accuracy.</p>
           <span class="tag">MLC · CrossSim · DTCO</span>
-        </article>
+          <span class="more">Read details →</span>
+        </a>
       </div>
     </section>
 
@@ -372,6 +398,174 @@
         </div>
       </div>
     </section>
+  </div><!-- /#home -->
+
+  <!-- ================= RESEARCH DETAIL VIEWS ================= -->
+  <!-- To add your own figures: replace a <figure class="dfig">...</figure> block with
+       <figure class="dfig"><img src="figures/your-image.png" style="width:100%" alt="...">
+       <figcaption>Your caption</figcaption></figure>
+       and upload the image to a "figures" folder in the repo. -->
+
+  <section class="detail" id="detail-r01" hidden>
+    <a class="back" href="#research">← Back to overview</a>
+    <span class="eyebrow" style="display:block;margin-top:22px">R.01 · Current research</span>
+    <h2>1T1R ReRAM Characterization</h2>
+    <p class="lede">How forming, SET, and RESET conditions shape the conductive filament in TaOx — and how the access transistor, not the instrument, should be the thing that limits current.</p>
+
+    <div class="figrow">
+      <figure class="dfig">
+        <svg viewBox="0 0 360 260" role="img" aria-label="Schematic of a 1T1R cell: access transistor in series with a TaOx ReRAM element">
+          <text x="178" y="24" class="svgl2">1T1R CELL</text>
+          <line x1="180" y1="36" x2="180" y2="62" stroke="#44525A" stroke-width="2"/>
+          <text x="190" y="46" class="svgl">BL</text>
+          <rect x="150" y="62" width="60" height="34" fill="#F1E7DF" stroke="#A65E2E" stroke-width="2"/>
+          <text x="158" y="83" class="svgl2">TaOx</text>
+          <line x1="180" y1="96" x2="180" y2="128" stroke="#44525A" stroke-width="2"/>
+          <line x1="160" y1="128" x2="200" y2="128" stroke="#44525A" stroke-width="2.5"/>
+          <line x1="152" y1="138" x2="208" y2="138" stroke="#44525A" stroke-width="2.5"/>
+          <line x1="160" y1="128" x2="160" y2="128" stroke="#44525A"/>
+          <line x1="180" y1="138" x2="180" y2="170" stroke="#44525A" stroke-width="2" visibility="hidden"/>
+          <line x1="164" y1="138" x2="164" y2="150" stroke="#44525A" stroke-width="2" visibility="hidden"/>
+          <line x1="130" y1="133" x2="152" y2="133" stroke="#44525A" stroke-width="2"/>
+          <text x="96" y="137" class="svgl">WL (V<tspan baseline-shift="sub" font-size="8">G</tspan>)</text>
+          <line x1="196" y1="138" x2="196" y2="176" stroke="#44525A" stroke-width="2"/>
+          <line x1="196" y1="176" x2="180" y2="176" stroke="#44525A" stroke-width="2"/>
+          <line x1="180" y1="176" x2="180" y2="206" stroke="#44525A" stroke-width="2"/>
+          <text x="190" y="222" class="svgl">SL</text>
+          <text x="30" y="246" class="svgl">Transistor saturation sets the SET current limit</text>
+        </svg>
+        <figcaption>Fig. A — 1T1R cell: word-line gate bias controls the current through the TaOx element.</figcaption>
+      </figure>
+      <figure class="dfig">
+        <svg viewBox="0 0 360 260" role="img" aria-label="Dual gate bias strategy: low gate voltage during SET, high gate voltage during RESET">
+          <text x="20" y="24" class="svgl2">DUAL GATE-BIAS STRATEGY</text>
+          <line x1="30" y1="210" x2="340" y2="210" stroke="#B9C2BE" stroke-width="1.2"/>
+          <line x1="30" y1="210" x2="30" y2="40" stroke="#B9C2BE" stroke-width="1.2"/>
+          <text x="16" y="50" class="svgl">V</text>
+          <text x="330" y="228" class="svgl">t</text>
+          <path d="M 40 210 L 70 210 L 70 130 L 130 130 L 130 210 L 170 210" fill="none" stroke="#A65E2E" stroke-width="2.5"/>
+          <text x="72" y="120" class="svgl2">SET · low VG</text>
+          <path d="M 170 210 L 200 210 L 200 70 L 280 70 L 280 210 L 330 210" fill="none" stroke="#4E6E7E" stroke-width="2.5"/>
+          <text x="202" y="60" class="svgl" fill="#4E6E7E">RESET · high VG</text>
+          <text x="40" y="246" class="svgl">Low VG limits filament growth; high VG frees RESET current</text>
+        </svg>
+        <figcaption>Fig. B — Gate-bias scheme: saturation-limited SET, unconstrained RESET.</figcaption>
+      </figure>
+    </div>
+
+    <h3>What this work is about</h3>
+    <p>In a 1T1R cell, the access transistor is more than a selector — biased correctly, it becomes a fast, local current limiter that responds far quicker than an instrument's compliance loop. This work characterizes TaOx-based devices on a Keysight B1500 semiconductor parameter analyzer, moving from SMU-compliance-limited operation to transistor-saturation-limited control, where a low word-line voltage during SET caps the filament's growth current and a high word-line voltage during RESET lets the cell draw what it needs to dissolve the filament.</p>
+    <h3>Methods</h3>
+    <p>Forming, quasi-static I–V sweeps, and pulsed SET/RESET cycling across multiple device samples; a Python measurement framework automates sweep sequences, SET-detection thresholds, and data logging, enabling systematic studies of memory window, switching variability, and endurance as a function of programming conditions.</p>
+  </section>
+
+  <section class="detail" id="detail-r02" hidden>
+    <a class="back" href="#research">← Back to overview</a>
+    <span class="eyebrow" style="display:block;margin-top:22px">R.02 · Current research</span>
+    <h2>Electrothermal Filament Modeling</h2>
+    <p class="lede">Where the heat goes during resistive switching — finite-element models of the conductive filament's temperature field, and how interface thermal properties set the peak.</p>
+
+    <div class="figrow">
+      <figure class="dfig">
+        <svg viewBox="0 0 360 260" role="img" aria-label="Cross-section of a ReRAM device showing a hot conductive filament between two electrodes">
+          <defs>
+            <radialGradient id="hotcore" cx="50%" cy="50%" r="65%">
+              <stop offset="0%" stop-color="#D98A4A"/>
+              <stop offset="55%" stop-color="#A65E2E"/>
+              <stop offset="100%" stop-color="#8A4A20"/>
+            </radialGradient>
+          </defs>
+          <text x="20" y="24" class="svgl2">FILAMENT CROSS-SECTION</text>
+          <rect x="60" y="40" width="240" height="30" fill="#5C6B73"/>
+          <text x="150" y="60" class="svgl" fill="#F6F8F7">TOP ELECTRODE</text>
+          <rect x="60" y="190" width="240" height="30" fill="#5C6B73"/>
+          <text x="146" y="210" class="svgl" fill="#F6F8F7">BOTTOM ELECTRODE</text>
+          <rect x="60" y="70" width="240" height="120" fill="#EDF1EF" stroke="#DFE5E2"/>
+          <text x="240" y="130" class="svgl">TaOx</text>
+          <path d="M 172 70 C 168 100, 164 120, 170 150 C 173 168, 176 180, 178 190 L 190 190 C 189 175, 191 160, 195 145 C 200 120, 196 95, 192 70 Z" fill="url(#hotcore)"/>
+          <ellipse cx="182" cy="130" rx="34" ry="44" fill="none" stroke="#D98A4A" stroke-width="1" opacity="0.6"/>
+          <ellipse cx="182" cy="130" rx="52" ry="60" fill="none" stroke="#D98A4A" stroke-width="1" opacity="0.3"/>
+          <text x="78" y="120" class="svgl2">T<tspan baseline-shift="sub" font-size="8">peak</tspan> ~ core</text>
+          <text x="60" y="246" class="svgl">Joule heating concentrates in the filament constriction</text>
+        </svg>
+        <figcaption>Fig. A — Conductive filament with Joule-heated core and thermal spreading contours.</figcaption>
+      </figure>
+      <figure class="dfig">
+        <svg viewBox="0 0 360 260" role="img" aria-label="Temperature versus position along a vertical cutline through the filament, peaking at the core">
+          <text x="20" y="24" class="svgl2">VERTICAL CUTLINE PROFILE</text>
+          <line x1="40" y1="210" x2="330" y2="210" stroke="#B9C2BE" stroke-width="1.2"/>
+          <line x1="40" y1="210" x2="40" y2="44" stroke="#B9C2BE" stroke-width="1.2"/>
+          <text x="20" y="54" class="svgl">T</text>
+          <text x="300" y="228" class="svgl">z (nm)</text>
+          <path d="M 44 196 C 100 192, 130 180, 160 110 C 175 76, 195 76, 210 110 C 240 180, 270 192, 326 196" fill="none" stroke="#A65E2E" stroke-width="2.5"/>
+          <line x1="185" y1="210" x2="185" y2="80" stroke="#DFE5E2" stroke-dasharray="4 4"/>
+          <text x="150" y="66" class="svgl2">T at filament core</text>
+          <text x="46" y="246" class="svgl">TBC at electrode interfaces shapes the falloff</text>
+        </svg>
+        <figcaption>Fig. B — Temperature along the vertical cutline: peak at the core, interface-limited decay.</figcaption>
+      </figure>
+    </div>
+
+    <h3>What this work is about</h3>
+    <p>Resistive switching is a thermal event as much as an electrical one: the filament's temperature during SET and RESET governs ion migration, retention, and variability. This work builds coupled electrothermal finite-element models of TaOx filaments in COMSOL Multiphysics, calibrating thermal boundary conductance at the electrode interfaces and extracting interface and vertical-cutline temperature profiles across parametric studies of bias, filament geometry, and composition.</p>
+    <h3>Why it matters</h3>
+    <p>Knowing the filament's temperature field — which cannot be measured directly at these scales — connects programming conditions to the microscopic physics, guiding both device engineering and the compact models used at circuit level. The simulation results feed directly into publication-quality figure pipelines targeting IEDM-style reporting.</p>
+  </section>
+
+  <section class="detail" id="detail-r03" hidden>
+    <a class="back" href="#research">← Back to overview</a>
+    <span class="eyebrow" style="display:block;margin-top:22px">R.03 · Current research</span>
+    <h2>Analog In-Memory Computing</h2>
+    <p class="lede">Matrix-vector multiplication in the memory array itself — and what device nonidealities cost you at the system level.</p>
+
+    <div class="figrow">
+      <figure class="dfig">
+        <svg viewBox="0 0 360 260" role="img" aria-label="Crossbar array performing analog matrix-vector multiplication with voltage inputs on rows and summed currents on columns">
+          <text x="20" y="24" class="svgl2">ANALOG MVM CROSSBAR</text>
+          <line x1="80" y1="60" x2="300" y2="60" stroke="#44525A" stroke-width="2"/>
+          <line x1="80" y1="110" x2="300" y2="110" stroke="#44525A" stroke-width="2"/>
+          <line x1="80" y1="160" x2="300" y2="160" stroke="#44525A" stroke-width="2"/>
+          <line x1="120" y1="40" x2="120" y2="200" stroke="#44525A" stroke-width="2"/>
+          <line x1="190" y1="40" x2="190" y2="200" stroke="#44525A" stroke-width="2"/>
+          <line x1="260" y1="40" x2="260" y2="200" stroke="#44525A" stroke-width="2"/>
+          <circle cx="120" cy="60" r="6" fill="#A65E2E"/><circle cx="190" cy="60" r="6" fill="#A65E2E"/><circle cx="260" cy="60" r="6" fill="#A65E2E"/>
+          <circle cx="120" cy="110" r="6" fill="#A65E2E"/><circle cx="190" cy="110" r="6" fill="#A65E2E"/><circle cx="260" cy="110" r="6" fill="#A65E2E"/>
+          <circle cx="120" cy="160" r="6" fill="#A65E2E"/><circle cx="190" cy="160" r="6" fill="#A65E2E"/><circle cx="260" cy="160" r="6" fill="#A65E2E"/>
+          <text x="28" y="64" class="svgl">V<tspan baseline-shift="sub" font-size="8">1</tspan> →</text>
+          <text x="28" y="114" class="svgl">V<tspan baseline-shift="sub" font-size="8">2</tspan> →</text>
+          <text x="28" y="164" class="svgl">V<tspan baseline-shift="sub" font-size="8">3</tspan> →</text>
+          <text x="104" y="222" class="svgl2">ΣI</text>
+          <text x="174" y="222" class="svgl2">ΣI</text>
+          <text x="244" y="222" class="svgl2">ΣI</text>
+          <text x="34" y="246" class="svgl">I = G·V at every cross-point; columns sum by Kirchhoff</text>
+        </svg>
+        <figcaption>Fig. A — Crossbar MVM: conductances store weights, physics does the multiply-accumulate.</figcaption>
+      </figure>
+      <figure class="dfig">
+        <svg viewBox="0 0 360 260" role="img" aria-label="Multi-level conductance states shown as a staircase of target levels with write-verify convergence">
+          <text x="20" y="24" class="svgl2">MULTI-LEVEL PROGRAMMING</text>
+          <line x1="40" y1="210" x2="330" y2="210" stroke="#B9C2BE" stroke-width="1.2"/>
+          <line x1="40" y1="210" x2="40" y2="44" stroke="#B9C2BE" stroke-width="1.2"/>
+          <text x="16" y="54" class="svgl">G</text>
+          <text x="280" y="228" class="svgl">level</text>
+          <rect x="60" y="178" width="40" height="8" fill="#4E6E7E"/>
+          <rect x="120" y="146" width="40" height="8" fill="#4E6E7E"/>
+          <rect x="180" y="114" width="40" height="8" fill="#A65E2E"/>
+          <rect x="240" y="82" width="40" height="8" fill="#4E6E7E"/>
+          <path d="M 200 168 C 196 150, 204 138, 200 126" fill="none" stroke="#A65E2E" stroke-width="1.6" stroke-dasharray="3 3"/>
+          <text x="208" y="152" class="svgl2">write-verify</text>
+          <text x="46" y="246" class="svgl">Discrete conductance targets; bit-slicing relaxes precision per device</text>
+        </svg>
+        <figcaption>Fig. B — Conductance levels reached by iterative write-verify programming.</figcaption>
+      </figure>
+    </div>
+
+    <h3>What this work is about</h3>
+    <p>A ReRAM crossbar computes matrix-vector products in one shot: weights live as conductances, inputs arrive as voltages, and Kirchhoff's law sums the products on each column. The catch is that real devices are noisy, drift, and hold fewer reliable levels than the math wants. This work develops multi-level conductance targeting with write-verify programming, and bit-slice architectures that spread a weight's bits across several devices so each one only needs modest precision.</p>
+    <h3>From device to system</h3>
+    <p>Using Sandia's CrossSim framework, measured device statistics propagate up to network-level accuracy, closing the loop between programming strategy and application performance. The motivating applications are energy-constrained on both ends of the spectrum — edge inference on space platforms, where radiation tolerance and power budgets collide, and data centers where energy has become the binding constraint on AI workloads.</p>
+  </section>
+
   </main>
 
   <footer id="contact">
@@ -412,6 +606,26 @@
         document.getElementById("resetBranch").classList.add("drawn");
       }, 150);
     });
+  })();
+
+  // Research detail routing: #r01/#r02/#r03 show a detail view, anything else shows home
+  (function () {
+    var home = document.getElementById("home");
+    var details = document.querySelectorAll(".detail");
+    function route() {
+      var h = location.hash.replace("#", "");
+      var target = document.getElementById("detail-" + h);
+      details.forEach(function (d) { d.hidden = true; });
+      if (target) {
+        home.hidden = true;
+        target.hidden = false;
+        window.scrollTo(0, 0);
+      } else {
+        home.hidden = false;
+      }
+    }
+    window.addEventListener("hashchange", route);
+    route();
   })();
 </script>
 </body>
