@@ -65,6 +65,10 @@
 
   .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
   .cards.four { grid-template-columns: repeat(2, 1fr); }
+  .card.feature { display: grid; grid-template-columns: 1.3fr .7fr; gap: 26px; align-items: center; }
+  .card.feature .fcopy { display: flex; flex-direction: column; }
+  .card.feature svg { width: 100%; height: auto; }
+  @media (max-width: 860px) { .card.feature { grid-template-columns: 1fr; } }
   .card { background: var(--panel); border: 1px solid var(--hairline); border-radius: 6px; padding: 22px; display: flex; flex-direction: column; }
   .card .id { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--copper-deep); letter-spacing: .1em; }
   .card h3 { font-size: 18px; margin: 10px 0 8px; font-weight: 600; }
@@ -137,6 +141,7 @@
     <nav aria-label="Primary">
       <a href="#research">Research</a>
       <a href="#vlsi">VLSI Design</a>
+      <a href="#packaging">Packaging</a>
       <a href="#pubs">Publications</a>
       <a href="#experience">Experience</a>
       <a href="#education">Education</a>
@@ -287,6 +292,39 @@
           <span class="more">Read details →</span>
         </a>
       </div>
+    </section>
+
+    <section id="packaging">
+      <div class="sec-head">
+        <h2>Semiconductor packaging &amp; reliability</h2>
+        <span class="sec-note">EEE 598 · Arizona State University · 2025</span>
+      </div>
+      <a class="card feature" href="#p01">
+        <div class="fcopy">
+          <span class="id">P.01</span>
+          <h3>Aging &amp; Defect Propagation in Package Interconnects</h3>
+          <p>Multi-physics study of how electromigration degrades chiplet-to-chiplet links in fan-out wafer-level packaging. Ansys Q3D current-density extraction and Icepak thermal maps feed Black's equation to predict lifetime for Cu pillars, RDL traces, and solder balls — then defect-derived RC models are pushed into HSPICE to show how physical aging surfaces as stuck-at, bridging, and delay faults.</p>
+          <span class="tag">Ansys Q3D · Icepak · HSPICE · FOWLP · EM reliability</span>
+          <span class="more">Read details →</span>
+        </div>
+        <svg viewBox="0 0 240 200" role="img" aria-label="Fan-out wafer-level package cross-section with solder ball, redistribution layers, copper pillar, silicon die and mold compound">
+          <circle cx="100" cy="42" r="26" fill="#C9CFD2" stroke="#5C6B73" stroke-width="1.4"/>
+          <text x="140" y="46" class="svgl">Solder</text>
+          <rect x="20" y="70" width="200" height="30" fill="#EDF1EF" stroke="#DFE5E2"/>
+          <line x1="34" y1="80" x2="206" y2="80" stroke="#B87333" stroke-width="3"/>
+          <line x1="34" y1="92" x2="206" y2="92" stroke="#B87333" stroke-width="3"/>
+          <text x="34" y="66" class="svgl2">RDL</text>
+          <rect x="142" y="88" width="12" height="30" fill="#B87333"/>
+          <text x="160" y="112" class="svgl">Cu pillar</text>
+          <rect x="20" y="100" width="200" height="52" fill="#E4E8E6" stroke="#DFE5E2"/>
+          <rect x="52" y="110" width="96" height="32" fill="#FFFFFF" stroke="#5C6B73" stroke-width="1.2"/>
+          <text x="100" y="130" class="svgl" text-anchor="middle">Si die</text>
+          <text x="28" y="148" class="svgl">EMC</text>
+          <rect x="20" y="152" width="200" height="18" fill="#5C6B73"/>
+          <text x="120" y="165" class="svgl" text-anchor="middle" fill="#F6F8F7">Laminate</text>
+          <text x="120" y="190" class="svgl" text-anchor="middle">FOWLP stack</text>
+        </svg>
+      </a>
     </section>
 
     <section id="pubs">
@@ -711,6 +749,94 @@
     <h3> My work </h3>
     <p>Designed a parameterized SystemVerilog GCN module for node classification: decoding a coordinate-format (COO) edge list to perform sparse feature aggregation as vector additions rather than wasteful dense multiplies, a MAC datapath for the 96-feature transformation, and argmax output classification — all behind registered I/O with memory-style read handshaking (<code>enable_read</code>/<code>read_address</code>). Balanced pipeline depth against flip-flop overhead to meet the &lt;100 ns end-to-end latency target, verified behavioral, post-synthesis, and post-APR netlists against golden outputs, and closed the design in Innovus with VCD-driven average-power analysis for the low-power optimization ranking.</p>
    
+  </section>
+
+  <!-- ================= PACKAGING PROJECT DETAIL ================= -->
+
+  <section class="detail" id="detail-p01" hidden>
+    <a class="back" href="#packaging">← Back to overview</a>
+    <span class="eyebrow" style="display:block;margin-top:22px">P.01 · Semiconductor packaging &amp; reliability</span>
+    <h2>Aging &amp; Defect Propagation in Package Interconnects</h2>
+    <p class="lede">Electromigration is usually treated as a hard-failure problem. This study traces it further — through current-density and thermal fields, into lifetime predictions, and finally into the logic-level faults a tester would actually see.</p>
+
+    <div class="figrow">
+      <figure class="dfig">
+        <svg viewBox="0 0 360 250" role="img" aria-label="Cross-section of a fan-out wafer-level package showing solder ball, redistribution layers, copper pillar, silicon die, mold compound and laminate">
+          <text x="20" y="22" class="svgl2">FOWLP CROSS-SECTION</text>
+          <circle cx="140" cy="72" r="28" fill="#C9CFD2" stroke="#5C6B73" stroke-width="1.4"/>
+          <text x="186" y="76" class="svgl">Solder ball</text>
+          <rect x="30" y="102" width="300" height="34" fill="#EDF1EF" stroke="#DFE5E2"/>
+          <line x1="46" y1="112" x2="314" y2="112" stroke="#B87333" stroke-width="3"/>
+          <line x1="46" y1="126" x2="314" y2="126" stroke="#B87333" stroke-width="3"/>
+          <text x="46" y="98" class="svgl2">RDL layers</text>
+          <rect x="212" y="122" width="14" height="26" fill="#B87333"/>
+          <text x="234" y="146" class="svgl">Cu pillar</text>
+          <rect x="30" y="136" width="300" height="56" fill="#E4E8E6" stroke="#DFE5E2"/>
+          <rect x="76" y="146" width="120" height="36" fill="#FFFFFF" stroke="#5C6B73" stroke-width="1.2"/>
+          <text x="136" y="169" class="svgl" text-anchor="middle">Si die</text>
+          <text x="40" y="188" class="svgl">EMC</text>
+          <rect x="30" y="192" width="300" height="18" fill="#5C6B73"/>
+          <text x="180" y="205" class="svgl" text-anchor="middle" fill="#F6F8F7">Backside laminate</text>
+          <text x="180" y="236" class="svgl" text-anchor="middle">The C2C path modelled in Q3D</text>
+        </svg>
+        <figcaption>Fig. A — The three interconnect types studied: Cu pillar, RDL trace, solder ball.</figcaption>
+      </figure>
+      <figure class="dfig">
+        <svg viewBox="0 0 360 250" role="img" aria-label="Predicted electromigration lifetime falling by about three orders of magnitude from 25 to 85 degrees Celsius">
+          <text x="20" y="22" class="svgl2">EM LIFETIME vs TEMPERATURE</text>
+          <line x1="46" y1="212" x2="336" y2="212" stroke="#B9C2BE" stroke-width="1.2"/>
+          <line x1="46" y1="212" x2="46" y2="46" stroke="#B9C2BE" stroke-width="1.2"/>
+          <text x="16" y="56" class="svgl">MTTF</text>
+          <text x="52" y="230" class="svgl">25 °C</text>
+          <text x="300" y="230" class="svgl">85 °C</text>
+          <path d="M 56 62 C 130 96, 200 142, 330 188" fill="none" stroke="#A65E2E" stroke-width="2.4"/>
+          <path d="M 56 74 C 130 108, 200 154, 330 196" fill="none" stroke="#4E6E7E" stroke-width="2.2"/>
+          <path d="M 56 116 C 130 150, 200 182, 330 206" fill="none" stroke="#8A9BA3" stroke-width="2.2"/>
+          <text x="238" y="70" class="svgl2">Cu pillar</text>
+          <text x="238" y="88" class="svgl" fill="#4E6E7E">RDL</text>
+          <text x="238" y="106" class="svgl" fill="#8A9BA3">Solder ball</text>
+          <text x="190" y="240" class="svgl" text-anchor="middle">~3 orders of magnitude lost</text>
+        </svg>
+        <figcaption>Fig. B — Lifetime collapses with temperature; RDL is most sensitive per cross-section.</figcaption>
+      </figure>
+    </div>
+
+    <figure class="dfig" style="max-width:640px">
+      <svg viewBox="0 0 560 150" role="img" aria-label="Multi-physics flow from Q3D current density to Icepak thermal maps to Black's equation lifetime to HSPICE fault models">
+        <text x="18" y="22" class="svgl2">MULTI-PHYSICS FLOW</text>
+        <rect x="18" y="44" width="116" height="54" rx="4" fill="#F1E7DF" stroke="#A65E2E" stroke-width="1.6"/>
+        <text x="76" y="68" class="svgl2" text-anchor="middle">Ansys Q3D</text>
+        <text x="76" y="86" class="svgl" text-anchor="middle">J &amp; RC maps</text>
+        <text x="144" y="76" class="svgl">→</text>
+        <rect x="154" y="44" width="116" height="54" rx="4" fill="#FFFFFF" stroke="#5C6B73" stroke-width="1.4"/>
+        <text x="212" y="68" class="svgl2" text-anchor="middle">Icepak</text>
+        <text x="212" y="86" class="svgl" text-anchor="middle">thermal map</text>
+        <text x="280" y="76" class="svgl">→</text>
+        <rect x="290" y="44" width="116" height="54" rx="4" fill="#FFFFFF" stroke="#5C6B73" stroke-width="1.4"/>
+        <text x="348" y="68" class="svgl2" text-anchor="middle">Black's eq</text>
+        <text x="348" y="86" class="svgl" text-anchor="middle">MTTF</text>
+        <text x="416" y="76" class="svgl">→</text>
+        <rect x="426" y="44" width="116" height="54" rx="4" fill="#FFFFFF" stroke="#5C6B73" stroke-width="1.4"/>
+        <text x="484" y="68" class="svgl2" text-anchor="middle">HSPICE</text>
+        <text x="484" y="86" class="svgl" text-anchor="middle">fault models</text>
+        <text x="280" y="128" class="svgl" text-anchor="middle">Geometry → lifetime → logic faults</text>
+      </svg>
+      <figcaption>Fig. C — Each stage's output becomes the next stage's input, linking physics to test.</figcaption>
+    </figure>
+
+    <h3>The question</h3>
+    <p>How do switching activity, capacitive coupling, temperature, and supply voltage accelerate electromigration and defect propagation in the package interconnects of multi-chiplet systems built in fan-out wafer-level packaging (FOWLP)? These structures push large currents through very small cross-sections — an RDL trace is only a couple of microns across — while thermal cycling drives CTE-mismatch stress, so voids, hillocks, and cracks change resistance and capacitance long before anything opens outright.</p>
+
+    <h3>My work</h3>
+    <p>Built three-dimensional models of Cu pillars, RDL segments, and solder balls in Ansys Q3D — in both nominal and deliberately defective variants, with voids, cracks, thinned segments, bridging residue, and pad misalignment — and extracted lumped parasitics plus spatial current-density maps. Ran steady-state thermal simulation of a two-chiplet package in Icepak to get temperature at the current-density hotspots, then combined J and T through Black's equation (n = 2, E<sub>a</sub> ≈ 0.9 eV) to predict mean time to failure across 25 °C to 85 °C. Finally, converted defect-dependent RC values into equivalent circuits for a two-chiplet HSPICE testbench to observe the logic-level consequences.</p>
+
+    <h3>What we found</h3>
+    <p>Lifetime is dominated by peak current density and local temperature: Cu pillar MTTF at J<sub>max</sub> falls from roughly 1.6 × 10⁶ h at 25 °C to about 1.2 × 10³ h at 85 °C, and solder balls drop to order 10² h at their maximum simulated current. Because Black's equation scales with J², introducing voids and cracks — which crowd current at the defect edge — shortens predicted lifetime by a further 3–10×, with narrowing cross-sections feeding a runaway loop of higher resistance, more Joule heating, and faster damage. At the circuit level, resistive shorts start behaving like stuck-at faults once below roughly 500–600 Ω, signal-to-signal bridges act as data-dependent wired-AND/OR faults around 200–300 Ω, and open defects with strong coupling let a victim net track its neighbour. The broader conclusion: electromigration is a timing-reliability problem well before it is a hard-failure one.</p>
+
+    <h3>What it demonstrates</h3>
+    <p>Comfort moving across abstraction layers — finite-element field solvers, thermal simulation, empirical reliability models, and SPICE-level fault behaviour — and connecting them into one argument. It also feeds directly into design and test practice: guidelines on widening critical lines and parallelizing pillars, and the case for BIST and ring-oscillator monitors that catch gradual RC drift rather than waiting for a hard open.</p>
+
+    <p style="font-size:13.5px; color:var(--slate); margin-top:26px; border-top:1px solid var(--hairline); padding-top:16px;">Team project with Yogesh Sundararaman, Aadharsh Parameshwar Vaitheesh Kumar, and Aditya Bhattacharjee · EEE 598 Advanced Semiconductor Packaging</p>
   </section>
 
   </main>
