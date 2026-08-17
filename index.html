@@ -64,6 +64,7 @@
   .sec-note { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--slate); }
 
   .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .cards.four { grid-template-columns: repeat(2, 1fr); }
   .card { background: var(--panel); border: 1px solid var(--hairline); border-radius: 6px; padding: 22px; display: flex; flex-direction: column; }
   .card .id { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--copper-deep); letter-spacing: .1em; }
   .card h3 { font-size: 18px; margin: 10px 0 8px; font-weight: 600; }
@@ -135,6 +136,7 @@
     <span class="brand">Aurick Das</span>
     <nav aria-label="Primary">
       <a href="#research">Research</a>
+      <a href="#vlsi">VLSI Design</a>
       <a href="#pubs">Publications</a>
       <a href="#experience">Experience</a>
       <a href="#education">Education</a>
@@ -246,6 +248,44 @@
             <p>Human sleeping-pose estimation from long-wave IR images for in-bed patient monitoring, and PSD-based optimization of Intelligent Reflecting Surface (IRS) configurations.</p>
           </div>
         </article>
+      </div>
+    </section>
+
+    <section id="vlsi">
+      <div class="sec-head">
+        <h2>VLSI design — full custom-silicon flow</h2>
+        <span class="sec-note">ASAP7 7 nm PDK · EEE 525, Arizona State University</span>
+      </div>
+      <p style="max-width:72ch; margin:-14px 0 26px; font-size:15px; color:#37423F;">Complete RTL-to-GDS experience on the ASAP7 7 nm predictive PDK — from FinFET device characterization in HSPICE, through standard-cell design with full physical verification, to synthesized, placed-and-routed digital blocks including a graph-neural-network accelerator optimized for power.</p>
+      <div class="cards four">
+        <a class="card" href="#l01">
+          <span class="id">V.01</span>
+          <h3>FinFET Device Characterization</h3>
+          <p>Subthreshold slope, threshold voltage, and effective-current extraction for SLVT/LVT/RVT/SRAM FinFETs across −40 °C to 120 °C in HSPICE, with scripted .measure automation.</p>
+          <span class="tag">HSPICE · WaveViewer · ASAP7</span>
+          <span class="more">Read details →</span>
+        </a>
+        <a class="card" href="#l02">
+          <span class="id">V.02</span>
+          <h3>Standard-Cell Design &amp; Verification</h3>
+          <p>Custom 7.5-track standard cell in Virtuoso — schematic, layout, and full DRC/LVS/PEX signoff with Calibre, including 3×3 abutment DRC and post-layout simulation.</p>
+          <span class="tag">Virtuoso · Calibre · xACT 3D</span>
+          <span class="more">Read details →</span>
+        </a>
+        <a class="card" href="#l03">
+          <span class="id">V.03</span>
+          <h3>RTL-to-GDS: Synthesis &amp; APR</h3>
+          <p>Pipelined adder taken through the complete digital flow — VCS verification, Design Compiler synthesis, Innovus place-and-route with CTS at a 2 GHz clock, GDS export, and DRC in Virtuoso.</p>
+          <span class="tag">DC · Innovus · VCS · 2 GHz</span>
+          <span class="more">Read details →</span>
+        </a>
+        <a class="card" href="#l04">
+          <span class="id">V.04</span>
+          <h3>GCN Hardware Accelerator</h3>
+          <p>Graph-convolutional-network ASIC in SystemVerilog — sparse COO-format aggregation, matrix-multiply datapath, argmax classification — synthesized and routed under a 100 ns latency budget with Innovus power analysis.</p>
+          <span class="tag">SystemVerilog · sparse MVM · low power</span>
+          <span class="more">Read details →</span>
+        </a>
       </div>
     </section>
 
@@ -544,6 +584,128 @@
     <p>A ReRAM crossbar computes matrix-vector products in one shot: weights live as conductances, inputs arrive as voltages, and Kirchhoff's law sums the products on each column. The catch is that real devices are noisy, drift, and hold fewer reliable levels than the math wants. This work develops multi-level conductance targeting with write-verify programming, and bit-slice architectures that spread a weight's bits across several devices so each one only needs modest precision.</p>
     <h3>From device to system</h3>
     <p>Using Sandia's CrossSim framework, measured device statistics propagate up to network-level accuracy, closing the loop between programming strategy and application performance. The motivating applications are energy-constrained on both ends of the spectrum — edge inference on space platforms, where radiation tolerance and power budgets collide, and data centers where energy has become the binding constraint on AI workloads.</p>
+  </section>
+
+  <!-- ================= VLSI LAB DETAIL VIEWS ================= -->
+
+  <section class="detail" id="detail-l01" hidden>
+    <a class="back" href="#vlsi">← Back to overview</a>
+    <span class="eyebrow" style="display:block;margin-top:22px">V.01 · VLSI Design · ASAP7 7 nm</span>
+    <h2>FinFET Device Characterization</h2>
+    <p class="lede">Extracting the numbers that define a technology — subthreshold slope, threshold voltage, and effective drive current for every device flavor in the ASAP7 PDK.</p>
+    <figure class="dfig" style="max-width:560px">
+      <svg viewBox="0 0 420 250" role="img" aria-label="Log drain current versus gate voltage showing subthreshold slope extraction">
+        <text x="20" y="22" class="svgl2">SUBTHRESHOLD CHARACTERIZATION</text>
+        <line x1="45" y1="215" x2="400" y2="215" stroke="#B9C2BE" stroke-width="1.2"/>
+        <line x1="45" y1="215" x2="45" y2="40" stroke="#B9C2BE" stroke-width="1.2"/>
+        <text x="16" y="50" class="svgl">log I<tspan baseline-shift="sub" font-size="8">DS</tspan></text>
+        <text x="368" y="234" class="svgl">V<tspan baseline-shift="sub" font-size="8">GS</tspan></text>
+        <path d="M 50 205 C 120 200, 160 190, 210 120 C 250 68, 300 55, 390 50" fill="none" stroke="#A65E2E" stroke-width="2.4"/>
+        <path d="M 50 209 C 130 205, 180 198, 235 135 C 272 90, 315 72, 390 64" fill="none" stroke="#4E6E7E" stroke-width="2.2"/>
+        <line x1="150" y1="188" x2="235" y2="98" stroke="#8A4A20" stroke-width="1.4" stroke-dasharray="4 3"/>
+        <text x="240" y="100" class="svgl2">SS ≈ ΔV/decade</text>
+        <text x="300" y="40" class="svgl2">SLVT</text>
+        <text x="330" y="86" class="svgl" fill="#4E6E7E">SRAM</text>
+      </svg>
+      <figcaption>Subthreshold I–V: slope extraction across device flavors and temperature.</figcaption>
+    </figure>
+    <h3>What I did</h3>
+    <p>Characterized all four ASAP7 FinFET flavors — SLVT, LVT, RVT, and SRAM, NMOS and PMOS — in HSPICE across −40 °C, 25 °C, and 120 °C. Extracted subthreshold swing and constant-current threshold voltage with scripted <code>.measure</code> commands, validated against hand calculations from waveform (x, y) markers in WaveViewer, and measured effective drive current (I<sub>EFF</sub>) using the dual-transistor I<sub>H</sub>/I<sub>L</sub> method. Computed fin counts from effective-width geometry (W<sub>eff</sub> = N·(2h<sub>fin</sub> + w<sub>fin</sub>)).</p>
+    <h3>What it demonstrates</h3>
+    <p>Fluency in device-level SPICE methodology: measurement automation rather than cursor-reading, cross-checking simulated extractions against first-principles calculations, and connecting V<sub>T</sub>/SS/leakage trade-offs to real design choices — why SLVT burns leakage for speed on critical paths while RVT carries the bulk of a design.</p>
+  </section>
+
+  <section class="detail" id="detail-l02" hidden>
+    <a class="back" href="#vlsi">← Back to overview</a>
+    <span class="eyebrow" style="display:block;margin-top:22px">V.02 · VLSI Design · ASAP7 7 nm</span>
+    <h2>Standard-Cell Design &amp; Physical Verification</h2>
+    <p class="lede">A custom logic cell built to library-production standards — layout on the 7.5-track grid, clean through DRC, LVS, and parasitic extraction.</p>
+    <figure class="dfig" style="max-width:560px">
+      <svg viewBox="0 0 420 250" role="img" aria-label="Standard cell layout abstraction with power rails, M2 routing tracks, and pin placement">
+        <text x="20" y="22" class="svgl2">7.5-TRACK CELL TEMPLATE</text>
+        <rect x="60" y="40" width="300" height="22" fill="#5C6B73"/>
+        <text x="180" y="55" class="svgl" fill="#F6F8F7">VDD RAIL</text>
+        <rect x="60" y="196" width="300" height="22" fill="#5C6B73"/>
+        <text x="180" y="211" class="svgl" fill="#F6F8F7">VSS RAIL</text>
+        <rect x="60" y="62" width="300" height="134" fill="#EDF1EF" stroke="#DFE5E2"/>
+        <line x1="60" y1="85" x2="360" y2="85" stroke="#B87333" stroke-width="3" opacity="0.55"/>
+        <line x1="60" y1="110" x2="360" y2="110" stroke="#B87333" stroke-width="3" opacity="0.55"/>
+        <line x1="60" y1="135" x2="360" y2="135" stroke="#B87333" stroke-width="3" opacity="0.55"/>
+        <line x1="60" y1="160" x2="360" y2="160" stroke="#B87333" stroke-width="3" opacity="0.55"/>
+        <text x="366" y="114" class="svgl">M2 tracks</text>
+        <rect x="130" y="103" width="14" height="14" fill="#A65E2E"/>
+        <text x="126" y="98" class="svgl2">A</text>
+        <rect x="220" y="128" width="14" height="14" fill="#A65E2E"/>
+        <text x="216" y="123" class="svgl2">B</text>
+        <rect x="300" y="153" width="14" height="14" fill="#8A4A20"/>
+        <text x="296" y="148" class="svgl2">Y</text>
+        <text x="60" y="240" class="svgl">Pins on distinct M2 tracks · DRC / LVS / PEX clean</text>
+      </svg>
+      <figcaption>Cell template: power rails, M2 pin grid, and the abutment constraints layout must satisfy.</figcaption>
+    </figure>
+    <h3>What I did</h3>
+    <p>Designed an assigned standard cell end-to-end in Virtuoso: schematic sized from the library CDL, symbol export, and layout on the exact 7.5-track architecture with all pins on distinct M2 routing tracks. Ran Calibre DRC and LVS to clean signoff, parasitic extraction with xACT 3D, and post-layout HSPICE simulation against an FO4 load — quantifying the delay penalty parasitics add over the pre-layout netlist. Verified abutment robustness with a 3×3 mirrored-array DRC (clean except the expected latch-up flag without tap cells).</p>
+    <h3>What it demonstrates</h3>
+    <p>Working command of the custom-layout toolchain — Virtuoso, Calibre rule decks, extraction flows — and the discipline library work demands: grid snapping, pin-access planning, and treating DRC/LVS not as a final hurdle but as part of the design loop.</p>
+  </section>
+
+  <section class="detail" id="detail-l03" hidden>
+    <a class="back" href="#vlsi">← Back to overview</a>
+    <span class="eyebrow" style="display:block;margin-top:22px">V.03 · VLSI Design · ASAP7 7 nm</span>
+    <h2>RTL-to-GDS: Synthesis &amp; Place-and-Route</h2>
+    <p class="lede">The complete digital implementation flow, run end to end — behavioral RTL in, DRC-clean layout out, closed at a 2 GHz clock.</p>
+    <figure class="dfig" style="max-width:640px">
+      <svg viewBox="0 0 560 150" role="img" aria-label="RTL to GDS flow: Verilog, VCS simulation, Design Compiler synthesis, Innovus place and route, Virtuoso DRC">
+        <text x="20" y="22" class="svgl2">RTL → GDS FLOW</text>
+        <rect x="20" y="45" width="88" height="44" rx="4" fill="#F1E7DF" stroke="#A65E2E" stroke-width="1.6"/>
+        <text x="34" y="63" class="svgl2">Verilog</text><text x="30" y="79" class="svgl">RTL + VCS</text>
+        <line x1="108" y1="67" x2="132" y2="67" stroke="#44525A" stroke-width="2" marker-end="none"/>
+        <text x="112" y="60" class="svgl">→</text>
+        <rect x="132" y="45" width="98" height="44" rx="4" fill="#FFFFFF" stroke="#5C6B73" stroke-width="1.4"/>
+        <text x="146" y="63" class="svgl2">Synthesis</text><text x="142" y="79" class="svgl">DC · SDC · timing</text>
+        <text x="234" y="60" class="svgl">→</text>
+        <rect x="254" y="45" width="108" height="44" rx="4" fill="#FFFFFF" stroke="#5C6B73" stroke-width="1.4"/>
+        <text x="268" y="63" class="svgl2">APR</text><text x="262" y="79" class="svgl">Innovus · CTS · route</text>
+        <text x="366" y="60" class="svgl">→</text>
+        <rect x="386" y="45" width="90" height="44" rx="4" fill="#FFFFFF" stroke="#5C6B73" stroke-width="1.4"/>
+        <text x="398" y="63" class="svgl2">Signoff</text><text x="394" y="79" class="svgl">GDS · DRC</text>
+        <text x="20" y="128" class="svgl">Post-synthesis and post-APR netlists re-verified against the same testbench · setup/hold reports at each stage</text>
+      </svg>
+      <figcaption>Each stage's output netlist re-simulated before moving forward — no silent breakage.</figcaption>
+    </figure>
+    <h3>What I did</h3>
+    <p>Implemented a registered 2-bit adder (I/O flip-flops at the module boundary) and carried it through the full flow: behavioral verification in VCS/DVE, Design Compiler synthesis to the ASAP7 standard-cell library at a 500 ps clock period (2 GHz), and Innovus APR — floorplanning, power stripes, clock-tree synthesis, routing — with post-route setup and hold timing reports and connectivity/DRC verification. Exported GDS, imported into Virtuoso, and closed physical DRC on the final layout. Re-ran the same testbench on the post-synthesis and post-APR netlists with back-annotated standard-cell models at every stage.</p>
+    <h3>What it demonstrates</h3>
+    <p>That I can drive the industry-standard Synopsys/Cadence implementation stack myself — write the Tcl, read the timing reports, chase the violations — not just describe the flow in the abstract.</p>
+  </section>
+
+  <section class="detail" id="detail-l04" hidden>
+    <a class="back" href="#vlsi">← Back to overview</a>
+    <span class="eyebrow" style="display:block;margin-top:22px">V.04 · VLSI Design · ASAP7 7 nm</span>
+    <h2>GCN Hardware Accelerator</h2>
+    <p class="lede">A graph-convolutional-network ASIC — sparse aggregation, dense matrix multiply, and argmax classification — implemented, routed, and optimized for power under a hard latency budget.</p>
+    <figure class="dfig" style="max-width:640px">
+      <svg viewBox="0 0 560 170" role="img" aria-label="GCN accelerator dataflow: COO decoder for sparse aggregation, MAC array for feature transformation, argmax classifier">
+        <text x="20" y="22" class="svgl2">GCN ACCELERATOR DATAFLOW</text>
+        <rect x="20" y="48" width="118" height="52" rx="4" fill="#F1E7DF" stroke="#A65E2E" stroke-width="1.6"/>
+        <text x="32" y="68" class="svgl2">COO decoder</text><text x="28" y="86" class="svgl">sparse aggregation</text>
+        <text x="144" y="66" class="svgl">→</text>
+        <rect x="166" y="48" width="128" height="52" rx="4" fill="#FFFFFF" stroke="#5C6B73" stroke-width="1.4"/>
+        <text x="180" y="68" class="svgl2">MAC datapath</text><text x="176" y="86" class="svgl">feature × weight</text>
+        <text x="300" y="66" class="svgl">→</text>
+        <rect x="322" y="48" width="100" height="52" rx="4" fill="#FFFFFF" stroke="#5C6B73" stroke-width="1.4"/>
+        <text x="336" y="68" class="svgl2">argmax</text><text x="332" y="86" class="svgl">classification</text>
+        <text x="428" y="66" class="svgl">→</text>
+        <rect x="448" y="48" width="92" height="52" rx="4" fill="#FFFFFF" stroke="#5C6B73" stroke-width="1.4"/>
+        <text x="460" y="68" class="svgl2">done +</text><text x="456" y="86" class="svgl">node labels</text>
+        <text x="20" y="140" class="svgl">Memory-mapped reads (enable_read / read_address) · pipelined for throughput · &lt; 100 ns end-to-end</text>
+      </svg>
+      <figcaption>Sparse-aware design: vector additions driven by COO edge lists instead of dense matrix multiplication.</figcaption>
+    </figure>
+    <h3>What I did</h3>
+    <p>Designed a parameterized SystemVerilog GCN module for node classification: decoding a coordinate-format (COO) edge list to perform sparse feature aggregation as vector additions rather than wasteful dense multiplies, a MAC datapath for the 96-feature transformation, and argmax output classification — all behind registered I/O with memory-style read handshaking (<code>enable_read</code>/<code>read_address</code>). Balanced pipeline depth against flip-flop overhead to meet the &lt;100 ns end-to-end latency target, verified behavioral, post-synthesis, and post-APR netlists against golden outputs, and closed the design in Innovus with VCD-driven average-power analysis for the low-power optimization ranking.</p>
+    <h3>What it demonstrates</h3>
+    <p>Architecture-level judgment, not just tool driving: exploiting sparsity in the algorithm, reasoning about the pipelining/power/throughput triangle, and connecting a workload — graph neural networks — to silicon constraints. It's the digital-design counterpart to my analog in-memory computing research, where the same matrix-vector multiplication is instead computed by device physics.</p>
   </section>
 
   </main>
