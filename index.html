@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aurick Das — Ph.D. Researcher · ReRAM & Analog In-Memory Computing</title>
+<meta name="description" content="Aurick Das — Ph.D. researcher in Electrical Engineering at Arizona State University. TaOx ReRAM characterization, COMSOL electrothermal modeling, analog in-memory computing, GaN HEMT TCAD." />
+<meta property="og:title" content="Aurick Das — Academic Portfolio" />
+<meta property="og:description" content="ReRAM · Analog In-Memory Computing · TCAD — Ph.D. researcher at Arizona State University." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #F6F8F7; --panel: #FFFFFF; --ink: #1A2422; --slate: #5C6B73;
+    --copper: #A65E2E; --copper-deep: #8A4A20; --cool: #4E6E7E; --hairline: #DFE5E2;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Archivo', system-ui, sans-serif; line-height: 1.6; margin: 0; }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  a:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; border-radius: 2px; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  .nav { display: flex; justify-content: space-between; align-items: center; padding: 26px 0; border-bottom: 1px solid var(--hairline); flex-wrap: wrap; gap: 10px; }
+  .nav .brand { font-weight: 600; letter-spacing: .02em; }
+  .nav a { color: var(--slate); text-decoration: none; font-size: 13px; margin-left: 20px; }
+  .nav a:first-child { margin-left: 0; }
+  .nav a:hover { color: var(--copper); }
+
+  .hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; padding: 68px 0 60px; }
+  .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .12em; color: var(--copper-deep); text-transform: uppercase; }
+  h1 { font-size: clamp(42px, 6.5vw, 72px); line-height: 1.02; margin: 14px 0 6px; font-weight: 700; font-variation-settings: 'wdth' 78; letter-spacing: -0.01em; }
+  .role { color: var(--slate); font-size: 17px; margin: 0 0 4px; }
+  .group { color: var(--slate); font-size: 14px; margin: 0; }
+  .tagline { margin-top: 18px; font-size: 16.5px; max-width: 58ch; }
+  .tagline + .tagline { margin-top: 14px; }
+  .hero-cta { margin-top: 28px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn { font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 11px 18px; border-radius: 3px; text-decoration: none; border: 1px solid var(--copper); }
+  .btn.solid { background: var(--copper); color: #fff; }
+  .btn.solid:hover { background: var(--copper-deep); }
+  .btn.ghost { color: var(--copper-deep); }
+  .btn.ghost:hover { background: #F1E7DF; }
+
+  .fig { background: var(--panel); border: 1px solid var(--hairline); border-radius: 6px; padding: 18px 18px 8px; margin: 0; }
+  .fig figcaption { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--slate); padding: 6px 4px 10px; }
+  .hyst { width: 100%; height: auto; display: block; }
+  .hyst .grid { stroke: #EDF1EF; }
+  .hyst .axis { stroke: #B9C2BE; stroke-width: 1.2; }
+  .hyst .axlbl { font-family: 'IBM Plex Mono', monospace; font-size: 13px; fill: var(--slate); }
+  .hyst .branch { fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-dasharray: 620; stroke-dashoffset: 620; transition: stroke-dashoffset 1.8s cubic-bezier(.4,0,.2,1); }
+  .hyst .branch.drawn { stroke-dashoffset: 0; }
+  @media (prefers-reduced-motion: reduce) { .hyst .branch { transition: none; stroke-dashoffset: 0; } }
+  .hyst .set { stroke: var(--copper); }
+  .hyst .reset { stroke: var(--cool); }
+  .hyst .lbl { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .08em; }
+  .hyst .set-lbl { fill: var(--copper-deep); }
+  .hyst .reset-lbl { fill: var(--cool); }
+  .hyst .origin { fill: var(--ink); }
+
+  section { padding: 54px 0; border-top: 1px solid var(--hairline); }
+  .sec-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 30px; }
+  h2 { font-size: 25px; font-weight: 650; font-variation-settings: 'wdth' 84; margin: 0; }
+  .sec-note { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--slate); }
+
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .cards.four { grid-template-columns: repeat(2, 1fr); }
+  .card { background: var(--panel); border: 1px solid var(--hairline); border-radius: 6px; padding: 22px; display: flex; flex-direction: column; }
+  .card .id { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--copper-deep); letter-spacing: .1em; }
+  .card h3 { font-size: 18px; margin: 10px 0 8px; font-weight: 600; }
+  .card p { font-size: 14.5px; color: #37423F; margin: 0 0 16px; flex: 1; }
+  .card .tag { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--slate); border-top: 1px solid var(--hairline); padding-top: 12px; }
+
+  /* interactive research cards */
+  a.card { text-decoration: none; color: inherit; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+  a.card:hover, a.card:focus-visible { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,36,34,.08); border-color: var(--copper); }
+  .card .more { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--copper-deep); margin-top: 10px; }
+  a.card:hover .more { text-decoration: underline; }
+
+  /* research detail views */
+  .detail { padding: 48px 0 64px; }
+  .detail .back { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--copper-deep); text-decoration: none; }
+  .detail .back:hover { text-decoration: underline; }
+  .detail h2 { font-size: 34px; margin: 14px 0 4px; }
+  .detail .lede { font-size: 18px; color: #2A3532; max-width: 62ch; margin: 12px 0 8px; }
+  .detail h3 { font-size: 18px; font-weight: 650; margin: 30px 0 8px; }
+  .detail p { font-size: 15px; color: #37423F; max-width: 72ch; }
+  .figrow { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 28px 0 6px; }
+  .dfig { background: var(--panel); border: 1px solid var(--hairline); border-radius: 6px; padding: 16px 16px 6px; margin: 0; }
+  .dfig svg { width: 100%; height: auto; display: block; }
+  .dfig figcaption { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--slate); padding: 8px 4px 10px; }
+  @media (max-width: 860px) { .figrow { grid-template-columns: 1fr; } }
+  .svgl { font-family: 'IBM Plex Mono', monospace; font-size: 11px; fill: var(--slate); }
+  .svgl2 { font-family: 'IBM Plex Mono', monospace; font-size: 11px; fill: var(--copper-deep); }
+
+  .rows .row { display: grid; grid-template-columns: 190px 1fr; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--hairline); }
+  .rows .row:last-child { border-bottom: none; }
+  .row .meta { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--slate); padding-top: 4px; }
+  .row h3 { font-size: 16.5px; margin: 0 0 6px; font-weight: 600; }
+  .row p { font-size: 14.5px; color: #37423F; margin: 0; }
+
+  .publist { counter-reset: pub; list-style: none; margin: 0; padding: 0; }
+  .publist li { counter-increment: pub; display: grid; grid-template-columns: 44px 1fr; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--hairline); }
+  .publist li:last-child { border-bottom: none; }
+  .publist li::before { content: "[" counter(pub, decimal-leading-zero) "]"; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--copper-deep); padding-top: 3px; }
+  .pub-title { font-size: 15.5px; font-weight: 600; margin: 0 0 3px; }
+  .pub-authors { font-size: 13.5px; color: #37423F; margin: 0 0 3px; }
+  .pub-venue { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--slate); }
+  h2.sub { font-size: 19px; margin-top: 40px; }
+
+  .skills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .skill { background: var(--panel); border: 1px solid var(--hairline); border-radius: 6px; padding: 18px 20px; }
+  .skill h3 { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--copper-deep); margin: 0 0 8px; }
+  .skill p { font-size: 14px; color: #37423F; margin: 0; }
+
+  footer { border-top: 1px solid var(--hairline); padding: 46px 0 60px; }
+  .foot { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
+  .foot .email { font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: var(--copper-deep); text-decoration: none; }
+  .foot .email:hover { text-decoration: underline; }
+  .foot nav a { display: block; color: var(--slate); text-decoration: none; font-size: 13px; margin-bottom: 6px; }
+  .foot nav a:hover { color: var(--copper); }
+  .foot .loc { margin: 6px 0 0; font-size: 13px; color: var(--slate); }
+  .fine { margin-top: 34px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9AA6A2; }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; padding: 44px 0 36px; }
+    .cards, .skills { grid-template-columns: 1fr; }
+    .rows .row { grid-template-columns: 1fr; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="nav">
+    <span class="brand">Aurick Das</span>
+    <nav aria-label="Primary">
+      <a href="#research">Research</a>
+      <a href="#vlsi">VLSI Design</a>
+      <a href="#pubs">Publications</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#awards">Awards</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+  <div id="home">
+    <div class="hero">
+      <div>
+        <span class="eyebrow">Analog In-Memory Computing · Memory Devices · Analog Mixed Signal · Neuromorphic Computing</span>
+        <h1>Aurick Das</h1>
+        <p class="role">Ph.D. Researcher · Electrical Engineering</p>
+        <p class="group"> Arizona State University</p>
+        <p class="tagline">Two problems wear the same face in my research: making AI accelerators efficient enough to run at the edge of a satellite, and making them survive the environment they'd be flying through. My Ph.D. work at Arizona State University, in Dr. Matthew Marinella's group, lives at that intersection — radiation-hardened analog AI accelerators built on resistive memory, for space platforms and for data centers where energy has become the binding constraint.</p>
+        <p class="tagline">What I bring to it is a device-physics foundation and carried forward: TCAD modeling of compound-semiconductor and advanced-node devices, ML-driven optimization for inverse device design, and radiation-effects analysis that runs from TCAD through circuit simulation. Different devices and analog circuits, same instinct — understand the physics and math first, then decide what are allowed to abstract away.</p>
+        <div class="hero-cta">
+          <a class="btn solid" href="#research">See my research</a>
+          <a class="btn ghost" href="mailto:aurick2023@gmail.com">Get in touch</a>
+        </div>
+      </div>
+      <figure class="fig">
+        <svg viewBox="0 0 420 420" class="hyst" role="img" aria-label="Pinched hysteresis current–voltage loop of a memristor">
+          <g class="gridlines"></g>
+          <line x1="30" y1="210" x2="390" y2="210" class="axis" />
+          <line x1="210" y1="30" x2="210" y2="390" class="axis" />
+          <text x="378" y="200" class="axlbl">V</text>
+          <text x="220" y="44" class="axlbl">I</text>
+          <path id="setBranch" class="branch set" d="M 210 210 C 260 206, 296 198, 328 132 C 344 98, 352 76, 340 68 C 326 60, 306 92, 284 124 C 258 160, 234 192, 210 210" />
+          <path id="resetBranch" class="branch reset" d="M 210 210 C 160 214, 124 222, 92 288 C 76 322, 68 344, 80 352 C 94 360, 114 328, 136 296 C 162 260, 186 228, 210 210" />
+          <text x="300" y="58" class="lbl set-lbl">SET</text>
+          <text x="64" y="376" class="lbl reset-lbl">RESET</text>
+          <circle cx="210" cy="210" r="3.5" class="origin" />
+        </svg>
+        <figcaption> Hysteresis I–V loop for bipolar resistive switching</figcaption>
+      </figure>
+    </div>
+
+    <section id="research">
+      <div class="sec-head">
+        <h2>Current research</h2>
+        <span class="sec-note">Arizona State University · 2025 – present</span>
+      </div>
+      <div class="cards">
+        <a class="card" href="#r01">
+          <span class="id"></span>
+          <h3>1T1R ReRAM Characterization</h3>
+          <p> Developed a Python-based measurement automation framework for characterizing 1T1R (one-transistor-one-resistor) ReRAM devices using a Keysight B1500 semiconductor parameter analyzer and probe station. The system autonomously searches for optimal switching conditions and validates device reliability without manual intervention.</p>
+          <span class="tag">Keysight B1500 · Python</span>
+          <span class="more">Read details →</span>
+        </a>
+        <a class="card" href="#r02">
+          <span class="id"> </span>
+          <h3>Electrothermal Filament Modeling</h3>
+          <p>COMSOL simulation of filament temperature during switching — thermal boundary conductance calibration and interface / vertical-cutline temperature profiles.</p>
+          <span class="tag">COMSOL · matplotlib</span>
+          <span class="more">Read details →</span>
+        </a>
+        <a class="card" href="#r03">
+          <span class="id"> </span>
+          <h3>Analog In-Memory Computing</h3>
+          <p>Multi-level conductance targeting, write-verify protocols, and bit-slice crossbar architectures — connecting device-level nonidealities to system-level accuracy.</p>
+          <span class="tag">MLC · CrossSim · DTCO</span>
+          <span class="more">Read details →</span>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <h2>Prior research</h2>
+        <span class="sec-note">BUET &amp; collaborations · 2021 – 2025</span>
+      </div>
+      <div class="rows">
+        <article class="row">
+          <span class="meta">2024 – 2025 · BUET</span>
+          <div>
+            <h3>III-Nitride Electronic Devices — ML-driven design</h3>
+            <p>Combined NSGA-II multi-objective optimization with neural networks over 472 TCAD-simulated AlGaN/GaN HEMT structures to maximize breakdown voltage while minimizing gate leakage and current collapse; parameter-variation studies in Sentaurus in collaboration with an international semiconductor foundry, plus ML-based compact modeling and field-plate studies for RF devices.</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">2023 – 2025 · BUET</span>
+          <div>
+            <h3>Silicon Power Devices — LDMOS &amp; SOI-LDMOS</h3>
+            <p>TCAD thermal analysis of junction temperature and leakage in LDMOS vs. SOI-LDMOS, Baliga figure-of-merit benchmarking of Ron,sp against breakdown voltage, COMSOL verification of thermal RC against analytical models, and rapid inverse design of field-plate LDMOS for BV / Ron,sp co-optimization.</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">2024 – 2025</span>
+          <div>
+            <h3>Neural Networks for TCAD Acceleration</h3>
+            <p>cGAN-based augmentation of Sentaurus TCAD image datasets and stable-diffusion generation of TDR images for AlGaN/GaN HEMTs, bypassing expensive physics simulations for device design loops.</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">2024 – 2025</span>
+          <div>
+            <h3>Radiation Effects in 3 nm CFET</h3>
+            <p>Sentaurus TCAD study of total ionizing dose (TID) effects on CFET technology at the 3 nm node.</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">2021 – 2022 · BUET</span>
+          <div>
+            <h3>Machine Learning &amp; Signal Processing</h3>
+            <p>Human sleeping-pose estimation from long-wave IR images for in-bed patient monitoring, and PSD-based optimization of Intelligent Reflecting Surface (IRS) configurations.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="vlsi">
+      <div class="sec-head">
+        <h2>VLSI design — full custom-silicon flow</h2>
+        <span class="sec-note">ASAP7 7 nm PDK · EEE 525, Arizona State University</span>
+      </div>
+      <p style="max-width:72ch; margin:-14px 0 26px; font-size:15px; color:#37423F;">Complete RTL-to-GDS experience on the ASAP7 7 nm predictive PDK — from FinFET device characterization in HSPICE, through standard-cell design with full physical verification, to synthesized, placed-and-routed digital blocks including a graph-neural-network accelerator optimized for power.</p>
+      <div class="cards four">
+        <a class="card" href="#l01">
+          <span class="id">V.01</span>
+          <h3>FinFET Device Characterization</h3>
+          <p>Subthreshold slope, threshold voltage, and effective-current extraction for SLVT/LVT/RVT/SRAM FinFETs across −40 °C to 120 °C in HSPICE, with scripted .measure automation.</p>
+          <span class="tag">HSPICE · WaveViewer · ASAP7</span>
+          <span class="more">Read details →</span>
+        </a>
+        <a class="card" href="#l02">
+          <span class="id">V.02</span>
+          <h3>Standard-Cell Design &amp; Verification</h3>
+          <p>Custom 7.5-track standard cell in Virtuoso — schematic, layout, and full DRC/LVS/PEX signoff with Calibre, including 3×3 abutment DRC and post-layout simulation.</p>
+          <span class="tag">Virtuoso · Calibre · xACT 3D</span>
+          <span class="more">Read details →</span>
+        </a>
+        <a class="card" href="#l03">
+          <span class="id">V.03</span>
+          <h3>RTL-to-GDS: Synthesis &amp; APR</h3>
+          <p>Pipelined adder taken through the complete digital flow --> VCS verification, Design Compiler synthesis, Innovus place-and-route with CTS at a 2 GHz clock, GDS export, and DRC in Virtuoso.</p>
+          <span class="tag">DC · Innovus · VCS · 2 GHz</span>
+          <span class="more">Read details →</span>
+        </a>
+        <a class="card" href="#l04">
+          <span class="id">V.04</span>
+          <h3>GCN Hardware Accelerator</h3>
+          <p>Graph-convolutional-network ASIC in SystemVerilog —-> sparse COO-format aggregation, matrix-multiply datapath, argmax classification — synthesized and routed under a 100 ns latency budget with Innovus power analysis.</p>
+          <span class="tag">SystemVerilog · sparse MVM · low power</span>
+          <span class="more">Read details →</span>
+        </a>
+      </div>
+    </section>
+
+    <section id="pubs">
+      <div class="sec-head"><h2>Publications</h2></div>
+      <ol class="publist">
+        <li><div>
+          <p class="pub-title">Human Sleeping Pose Estimation from IR Images for In-bed Patient Monitoring Using Image Processing and Deep Learning</p>
+          <p class="pub-authors">S. K. Nahin, S. Acharjee, <strong>A. Das</strong>, S. Saha, S. Hossain, M. A. Haque</p>
+          <span class="pub-venue">Heliyon</span>
+        </div></li>
+        <li><div>
+          <p class="pub-title">Inverse Design of AlGaN/GaN HEMT RF Device with Source Connected Field Plate</p>
+          <p class="pub-authors"><strong>A. Das</strong>, S. R. Arnab, X. Xiang, T. Hossain, R. H. Palash, B. Sikder, E. Yagyu, M. Nakamura, K. H. Teo, N. Chowdhury</p>
+          <span class="pub-venue">Advanced Theory and Simulations</span>
+        </div></li>
+        <li><div>
+          <p class="pub-title">Dynamically Tunable Physically Unclonable Functions for Electro-Optic Photonic Systems</p>
+          <p class="pub-authors">P. Agnihotri, <strong>A. Das</strong></p>
+          <span class="pub-venue">Submitted for IEEE VLSI Test Symposium</span>
+        </div></li>
+        <li><div>
+          <p class="pub-title">Vernier-Based Self-Referencing Test Cell for Silicon Photonic Ring Resonators</p>
+          <p class="pub-authors">P. Agnihotri, <strong>A. Das</strong>, J. Plusquellic</p>
+          <span class="pub-venue">Submitted IEEE VLSI Test Symposium</span>
+        </div></li>
+      </ol>
+
+    </section>
+
+    <section id="experience">
+      <div class="sec-head"><h2>Industry experience</h2></div>
+      <div class="rows">
+        <article class="row">
+          <span class="meta">Sep 2023 – 2025</span>
+          <div>
+            <h3>TCAD Engineer — Neural Semiconductor Limited</h3>
+            <p>Designed gate-stack and field-plate technologies for AlGaN/GaN HEMT power devices in Sentaurus TCAD for an international foundry; compact modeling of experimental RF and power device data in ADS / IC-CAP; GDS-mask-driven RF device design; COMSOL modeling of Mg diffusion profiles and thermal RC; trap, kink-effect, and leakage analysis; comparative LDMOS (BCD vs. BCD-SOI) studies.</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">Dec 2022 – Mar 2023</span>
+          <div>
+            <h3>Intern — Ulkasemi Pvt. Limited</h3>
+            <p>Analog design and RTL: high-precision op-amp in gpdk090 (Cadence Virtuoso) and an SPI protocol implementation from scratch in Verilog/SystemVerilog.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="sec-head"><h2>Education</h2></div>
+      <div class="rows">
+        <article class="row">
+          <span class="meta">2025 – Present</span>
+          <div>
+            <h3>Ph.D., Electrical Engineering</h3>
+            <p>Arizona State University · GPA 4.0 / 4.0</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">2023 – 2025</span>
+          <div>
+            <h3>M.Sc., Electrical &amp; Electronic Engineering</h3>
+            <p>Bangladesh University of Engineering and Technology (BUET)</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">2018 – 2023</span>
+          <div>
+            <h3>B.Sc., Electrical &amp; Electronic Engineering</h3>
+            <p>Bangladesh University of Engineering and Technology (BUET)</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="awards">
+      <div class="sec-head"><h2>Awards &amp; competitions</h2></div>
+      <div class="rows">
+        <article class="row">
+          <span class="meta">ICIP 2021 · Alaska, USA</span>
+          <div>
+            <h3>1st Place — IEEE Video and Image Processing Cup</h3>
+            <p>Team Samaritan won first place among 50+ university teams worldwide ($5,000 prize) with an in-bed human keypoint and pose detection system from LWIR images under adverse lighting and covered conditions.</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">2021</span>
+          <div>
+            <h3>15th Worldwide — IEEE Signal Processing Cup</h3>
+            <p>Optimized Intelligent Reflecting Surface configurations via power spectral density analysis; ranked 15th of 50 teams.</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">2022 · Dhaka</span>
+          <div>
+            <h3>Top 10 — Robi Datathon 2.0</h3>
+            <p>Top 10 of 358 participants; large-scale tabular analysis and geospatial work with GeoPandas.</p>
+          </div>
+        </article>
+        <article class="row">
+          <span class="meta">Academic</span>
+          <div>
+            <h3>Dean's Honor List &amp; Merit Scholarships</h3>
+            <p>Dean's Honor List at BUET; merit scholarships in SSC and HSC examinations.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><h2>Skills &amp; tools</h2></div>
+      <div class="skills">
+        <div class="skill">
+          <h3>Device &amp; EDA</h3>
+          <p>Sentaurus TCAD · COMSOL Multiphysics · Cadence Virtuoso · Innovus · ADS · IC-CAP · Ansys HFSS / Q3D / Icepak / Lumerical / EDT</p>
+        </div>
+        <div class="skill">
+          <h3>Measurement</h3>
+          <p>Keysight B1500 · 1T1R ReRAM characterization · SET/RESET cycling · write-verify protocols</p>
+        </div>
+        <div class="skill">
+          <h3>Languages</h3>
+          <p>Python · C/C++ · Verilog · SystemVerilog · MATLAB · HTML · Arduino</p>
+        </div>
+        <div class="skill">
+          <h3>Workflow</h3>
+          <p>Git/GitHub · Unix shell · VS Code · Simulink · Proteus · OrCAD / PSpice</p>
+        </div>
+      </div>
+    </section>
+  </div><!-- /#home -->
+
+  <!-- ================= RESEARCH DETAIL VIEWS ================= -->
+  <!-- To add your own figures: replace a <figure class="dfig">...</figure> block with
+       <figure class="dfig"><img src="figures/your-image.png" style="width:100%" alt="...">
+       <figcaption>Your caption</figcaption></figure>
+       and upload the image to a "figures" folder in the repo. -->
+
+  <section class="detail" id="detail-r01" hidden>
+    <a class="back" href="#research">← Back to overview</a>
+    <span class="eyebrow" style="display:block;margin-top:22px">R.01 · Current research</span>
+    <h2>1T1R ReRAM Characterization</h2>
+    <p class="lede">How forming, SET, and RESET conditions shape the conductive filament in TaOx.</p>
+
+    <div class="figrow">
+      <figure class="dfig">
+        <svg viewBox="0 0 360 260" role="img" aria-label="Schematic of a 1T1R cell: access transistor in series with a TaOx ReRAM element">
+          <text x="178" y="24" class="svgl2">1T1R CELL</text>
+          <line x1="180" y1="36" x2="180" y2="62" stroke="#44525A" stroke-width="2"/>
+          <text x="190" y="46" class="svgl">BL</text>
+          <rect x="150" y="62" width="60" height="34" fill="#F1E7DF" stroke="#A65E2E" stroke-width="2"/>
+          <text x="158" y="83" class="svgl2">TaOx</text>
+          <line x1="180" y1="96" x2="180" y2="128" stroke="#44525A" stroke-width="2"/>
+          <line x1="160" y1="128" x2="200" y2="128" stroke="#44525A" stroke-width="2.5"/>
+          <line x1="152" y1="138" x2="208" y2="138" stroke="#44525A" stroke-width="2.5"/>
+          <line x1="160" y1="128" x2="160" y2="128" stroke="#44525A"/>
+          <line x1="180" y1="138" x2="180" y2="170" stroke="#44525A" stroke-width="2" visibility="hidden"/>
+          <line x1="164" y1="138" x2="164" y2="150" stroke="#44525A" stroke-width="2" visibility="hidden"/>
+          <line x1="130" y1="133" x2="152" y2="133" stroke="#44525A" stroke-width="2"/>
+          <text x="96" y="137" class="svgl">WL (V<tspan baseline-shift="sub" font-size="8">G</tspan>)</text>
+          <line x1="196" y1="138" x2="196" y2="176" stroke="#44525A" stroke-width="2"/>
+          <line x1="196" y1="176" x2="180" y2="176" stroke="#44525A" stroke-width="2"/>
+          <line x1="180" y1="176" x2="180" y2="206" stroke="#44525A" stroke-width="2"/>
+          <text x="190" y="222" class="svgl">SL</text>
+          <text x="180" y="246" class="svgl" text-anchor="middle">Transistor limits SET current</text>
+        </svg>
+        <figcaption> 1T1R cell: word-line gate bias controls the current through the TaOx element.</figcaption>
+      </figure>
+      <figure class="dfig">
+        <svg viewBox="0 0 360 260" role="img" aria-label="Dual gate bias strategy: low gate voltage during SET, high gate voltage during RESET">
+          <text x="20" y="24" class="svgl2">DUAL GATE-BIAS STRATEGY</text>
+          <line x1="30" y1="210" x2="340" y2="210" stroke="#B9C2BE" stroke-width="1.2"/>
+          <line x1="30" y1="210" x2="30" y2="40" stroke="#B9C2BE" stroke-width="1.2"/>
+          <text x="16" y="50" class="svgl">V</text>
+          <text x="330" y="228" class="svgl">t</text>
+          <path d="M 40 210 L 70 210 L 70 130 L 130 130 L 130 210 L 170 210" fill="none" stroke="#A65E2E" stroke-width="2.5"/>
+          <text x="72" y="120" class="svgl2">SET · low VG</text>
+          <path d="M 170 210 L 200 210 L 200 70 L 280 70 L 280 210 L 330 210" fill="none" stroke="#4E6E7E" stroke-width="2.5"/>
+          <text x="202" y="60" class="svgl" fill="#4E6E7E">RESET · high VG</text>
+          <text x="180" y="246" class="svgl" text-anchor="middle">Low VG caps SET · high VG frees RESET</text>
+        </svg>
+        <figcaption> Gate-bias scheme: saturation-limited SET, unconstrained RESET.</figcaption>
+      </figure>
+    </div>
+
+    <h3>What this work is about</h3>
+    <p>In a 1T1R cell, the access transistor is more than a selector — biased correctly, it becomes a fast, local current limiter that responds far quicker than an instrument's compliance loop. This work characterizes TaOx-based devices on a Keysight B1500 semiconductor parameter analyzer, a transistor-saturation-limited control, where a low word-line voltage during SET caps the filament's growth current and a high word-line voltage during RESET lets the cell draw what it needs to dissolve the filament.</p>
+    <h3>Methods</h3>
+    <p>Forming, quasi-static I–V sweeps, and pulsed SET/RESET cycling across multiple device samples; a Python measurement framework automates sweep sequences, SET-detection thresholds, and data logging, enabling systematic studies of memory window, switching variability, and endurance as a function of programming conditions.</p>
+  </section>
+
+  <section class="detail" id="detail-r02" hidden>
+    <a class="back" href="#research">← Back to overview</a>
+    <span class="eyebrow" style="display:block;margin-top:22px">R.02 · Current research</span>
+    <h2>Electrothermal Filament Modeling</h2>
+    <p class="lede">Where the heat goes during resistive switching — finite-element models of the conductive filament's temperature field, and how interface thermal properties set the peak.</p>
+
+    <div class="figrow">
+      <figure class="dfig">
+        <svg viewBox="0 0 360 260" role="img" aria-label="Cross-section of a ReRAM device showing a hot conductive filament between two electrodes">
+          <defs>
+            <radialGradient id="hotcore" cx="50%" cy="50%" r="65%">
+              <stop offset="0%" stop-color="#D98A4A"/>
+              <stop offset="55%" stop-color="#A65E2E"/>
+              <stop offset="100%" stop-color="#8A4A20"/>
+            </radialGradient>
+          </defs>
+          <text x="20" y="24" class="svgl2">FILAMENT CROSS-SECTION</text>
+          <rect x="60" y="40" width="240" height="30" fill="#5C6B73"/>
+          <text x="150" y="60" class="svgl" fill="#F6F8F7">TOP ELECTRODE</text>
+          <rect x="60" y="190" width="240" height="30" fill="#5C6B73"/>
+          <text x="146" y="210" class="svgl" fill="#F6F8F7">BOTTOM ELECTRODE</text>
+          <rect x="60" y="70" width="240" height="120" fill="#EDF1EF" stroke="#DFE5E2"/>
+          <text x="240" y="130" class="svgl">TaOx</text>
+          <path d="M 172 70 C 168 100, 164 120, 170 150 C 173 168, 176 180, 178 190 L 190 190 C 189 175, 191 160, 195 145 C 200 120, 196 95, 192 70 Z" fill="url(#hotcore)"/>
+          <ellipse cx="182" cy="130" rx="34" ry="44" fill="none" stroke="#D98A4A" stroke-width="1" opacity="0.6"/>
+          <ellipse cx="182" cy="130" rx="52" ry="60" fill="none" stroke="#D98A4A" stroke-width="1" opacity="0.3"/>
+          <text x="78" y="120" class="svgl2">T<tspan baseline-shift="sub" font-size="8">peak</tspan> ~ core</text>
+          <text x="180" y="246" class="svgl" text-anchor="middle">Joule heat peaks in the constriction</text>
+        </svg>
+        <figcaption> Conductive filament with Joule-heated core and thermal spreading contours.</figcaption>
+      </figure>
+      <figure class="dfig">
+        <svg viewBox="0 0 360 260" role="img" aria-label="Temperature versus position along a vertical cutline through the filament, peaking at the core">
+          <text x="20" y="24" class="svgl2">VERTICAL CUTLINE PROFILE</text>
+          <line x1="40" y1="210" x2="330" y2="210" stroke="#B9C2BE" stroke-width="1.2"/>
+          <line x1="40" y1="210" x2="40" y2="44" stroke="#B9C2BE" stroke-width="1.2"/>
+          <text x="20" y="54" class="svgl">T</text>
+          <text x="300" y="228" class="svgl">z (nm)</text>
+          <path d="M 44 196 C 100 192, 130 180, 160 110 C 175 76, 195 76, 210 110 C 240 180, 270 192, 326 196" fill="none" stroke="#A65E2E" stroke-width="2.5"/>
+          <line x1="185" y1="210" x2="185" y2="80" stroke="#DFE5E2" stroke-dasharray="4 4"/>
+          <text x="150" y="66" class="svgl2">T at filament core</text>
+          <text x="180" y="246" class="svgl" text-anchor="middle">Interface TBC shapes the falloff</text>
+        </svg>
+        <figcaption> Temperature peak at the core of filament </figcaption>
+      </figure>
+    </div>
+
+    <h3>What this work is about</h3>
+    <p>Resistive switching is a thermal event as much as an electrical one: the filament's temperature during SET and RESET governs ion migration, retention, and variability. This work builds coupled electrothermal finite-element models of TaOx filaments in COMSOL Multiphysics, calibrating thermal boundary conductance at the electrode interfaces and extracting interface and vertical-cutline temperature profiles across parametric studies of bias, filament geometry, and composition.</p>
+    <h3>Why it matters</h3>
+    <p> Heat doesn't respect cell boundaries. In a dense crossbar array, thermal energy generated in one filament doesn't stay contained — it conducts outward through the oxide stack, bleeds into neighboring electrodes, and can silently disturb the resistance state of adjacent, unselected cells. This is thermal crosstalk, and it's one of the most insidious scalability bottlenecks facing ReRAM as arrays shrink and densities climb.</p>
+  </section>
+
+  <section class="detail" id="detail-r03" hidden>
+    <a class="back" href="#research">← Back to overview</a>
+    <span class="eyebrow" style="display:block;margin-top:22px">R.03 · Current research</span>
+    <h2>Analog In-Memory Computing</h2>
+    <p class="lede">Matrix-vector multiplication in the memory array itself — and what device nonidealities cost you at the system level.</p>
+
+    <div class="figrow">
+      <figure class="dfig">
+        <svg viewBox="0 0 360 260" role="img" aria-label="Crossbar array performing analog matrix-vector multiplication with voltage inputs on rows and summed currents on columns">
+          <text x="20" y="24" class="svgl2">ANALOG MVM CROSSBAR</text>
+          <line x1="80" y1="60" x2="300" y2="60" stroke="#44525A" stroke-width="2"/>
+          <line x1="80" y1="110" x2="300" y2="110" stroke="#44525A" stroke-width="2"/>
+          <line x1="80" y1="160" x2="300" y2="160" stroke="#44525A" stroke-width="2"/>
+          <line x1="120" y1="40" x2="120" y2="200" stroke="#44525A" stroke-width="2"/>
+          <line x1="190" y1="40" x2="190" y2="200" stroke="#44525A" stroke-width="2"/>
+          <line x1="260" y1="40" x2="260" y2="200" stroke="#44525A" stroke-width="2"/>
+          <circle cx="120" cy="60" r="6" fill="#A65E2E"/><circle cx="190" cy="60" r="6" fill="#A65E2E"/><circle cx="260" cy="60" r="6" fill="#A65E2E"/>
+          <circle cx="120" cy="110" r="6" fill="#A65E2E"/><circle cx="190" cy="110" r="6" fill="#A65E2E"/><circle cx="260" cy="110" r="6" fill="#A65E2E"/>
+          <circle cx="120" cy="160" r="6" fill="#A65E2E"/><circle cx="190" cy="160" r="6" fill="#A65E2E"/><circle cx="260" cy="160" r="6" fill="#A65E2E"/>
+          <text x="28" y="64" class="svgl">V<tspan baseline-shift="sub" font-size="8">1</tspan> →</text>
+          <text x="28" y="114" class="svgl">V<tspan baseline-shift="sub" font-size="8">2</tspan> →</text>
+          <text x="28" y="164" class="svgl">V<tspan baseline-shift="sub" font-size="8">3</tspan> →</text>
+          <text x="104" y="222" class="svgl2">ΣI</text>
+          <text x="174" y="222" class="svgl2">ΣI</text>
+          <text x="244" y="222" class="svgl2">ΣI</text>
+          <text x="34" y="246" class="svgl">I = G·V at every cross-point </text>
+        </svg>
+        <figcaption> Crossbar MVM: conductances store weights.</figcaption>
+      </figure>
+      <figure class="dfig">
+        <svg viewBox="0 0 360 260" role="img" aria-label="Multi-level conductance states shown as a staircase of target levels with write-verify convergence">
+          <text x="20" y="24" class="svgl2">MULTI-LEVEL PROGRAMMING</text>
+          <line x1="40" y1="210" x2="330" y2="210" stroke="#B9C2BE" stroke-width="1.2"/>
+          <line x1="40" y1="210" x2="40" y2="44" stroke="#B9C2BE" stroke-width="1.2"/>
+          <text x="16" y="54" class="svgl">G</text>
+          <text x="280" y="228" class="svgl">level</text>
+          <rect x="60" y="178" width="40" height="8" fill="#4E6E7E"/>
+          <rect x="120" y="146" width="40" height="8" fill="#4E6E7E"/>
+          <rect x="180" y="114" width="40" height="8" fill="#A65E2E"/>
+          <rect x="240" y="82" width="40" height="8" fill="#4E6E7E"/>
+          <path d="M 200 168 C 196 150, 204 138, 200 126" fill="none" stroke="#A65E2E" stroke-width="1.6" stroke-dasharray="3 3"/>
+          <text x="208" y="152" class="svgl2">write-verify</text>
+          <text x="46" y="246" class="svgl">Discrete conductance target </text>
+        </svg>
+        <figcaption> Conductance levels reached by various write-verify programming technique.</figcaption>
+      </figure>
+    </div>
+
+    <h3>What this work is about</h3>
+    <p>A ReRAM crossbar computes matrix-vector products in one shot: weights live as conductances, inputs arrive as voltages, and Kirchhoff's law sums the products on each column. The catch is that real devices are noisy, drift, and hold fewer reliable levels than the math wants. This work develops multi-level conductance targeting with write-verify programming, and bit-slice architectures that spread a weight's bits across several devices so each one only needs modest precision.</p>
+    <h3>From device to system</h3>
+    <p>Using Sandia's CrossSim framework, measured device statistics propagate up to network-level accuracy, closing the loop between programming strategy and application performance. The motivating applications are energy-constrained on both ends of the spectrum — edge inference on space platforms, where radiation tolerance and power budgets collide, and data centers where energy has become the binding constraint on AI workloads.</p>
+  </section>
+
+  <!-- ================= VLSI LAB DETAIL VIEWS ================= -->
+
+  <section class="detail" id="detail-l01" hidden>
+    <a class="back" href="#vlsi">← Back to overview</a>
+    <span class="eyebrow" style="display:block;margin-top:22px">V.01 · VLSI Design · ASAP7 7 nm</span>
+    <h2>FinFET Device Characterization</h2>
+    <p class="lede">Extracting the numbers that define a technology — subthreshold slope, threshold voltage, and effective drive current for every device flavor in the ASAP7 PDK.</p>
+    <figure class="dfig" style="max-width:560px">
+      <svg viewBox="0 0 420 250" role="img" aria-label="Log drain current versus gate voltage showing subthreshold slope extraction">
+        <text x="20" y="22" class="svgl2">SUBTHRESHOLD CHARACTERIZATION</text>
+        <line x1="45" y1="215" x2="400" y2="215" stroke="#B9C2BE" stroke-width="1.2"/>
+        <line x1="45" y1="215" x2="45" y2="40" stroke="#B9C2BE" stroke-width="1.2"/>
+        <text x="16" y="50" class="svgl">log I<tspan baseline-shift="sub" font-size="8">DS</tspan></text>
+        <text x="368" y="234" class="svgl">V<tspan baseline-shift="sub" font-size="8">GS</tspan></text>
+        <path d="M 50 205 C 120 200, 160 190, 210 120 C 250 68, 300 55, 390 50" fill="none" stroke="#A65E2E" stroke-width="2.4"/>
+        <path d="M 50 209 C 130 205, 180 198, 235 135 C 272 90, 315 72, 390 64" fill="none" stroke="#4E6E7E" stroke-width="2.2"/>
+        <line x1="150" y1="188" x2="235" y2="98" stroke="#8A4A20" stroke-width="1.4" stroke-dasharray="4 3"/>
+        <text x="240" y="100" class="svgl2">SS ≈ ΔV/decade</text>
+        <text x="300" y="40" class="svgl2">SLVT</text>
+        <text x="330" y="86" class="svgl" fill="#4E6E7E">SRAM</text>
+      </svg>
+      <figcaption>Subthreshold I–V: slope extraction across device flavors and temperature.</figcaption>
+    </figure>
+    <h3>My Work </h3>
+    <p>Characterized all four ASAP7 FinFET Devices : SLVT, LVT, RVT, and SRAM, NMOS and PMOS — in HSPICE across −40 °C, 25 °C, and 120 °C. Extracted subthreshold swing and constant-current threshold voltage with scripted <code>.measure</code> commands, validated against hand calculations from waveform in WaveViewer, and measured effective drive current (I<sub>EFF</sub>) using the dual-transistor I<sub>H</sub>/I<sub>L</sub> method. Computed fin counts from effective-width geometry (W<sub>eff</sub> = N·(2h<sub>fin</sub> + w<sub>fin</sub>)).</p>
+    <h3> Demonstration </h3>
+    <p>Fluency in device-level SPICE methodology: measurement automation rather than cursor-reading, cross-checking simulated extractions against first-principles calculations, and connecting V<sub>T</sub>/SS/leakage trade-offs to real design choices like why SLVT burns leakage for speed on critical paths while RVT carries the bulk of a design.</p>
+  </section>
+
+  <section class="detail" id="detail-l02" hidden>
+    <a class="back" href="#vlsi">← Back to overview</a>
+    <span class="eyebrow" style="display:block;margin-top:22px">V.02 · VLSI Design · ASAP7 7 nm</span>
+    <h2>Standard-Cell Design &amp; Physical Verification</h2>
+    <p class="lede">A custom logic cell built to library-production standards — layout on the 7.5-track grid, clean through DRC, LVS, and parasitic extraction.</p>
+    <figure class="dfig" style="max-width:560px">
+      <svg viewBox="0 0 420 250" role="img" aria-label="Standard cell layout abstraction with power rails, M2 routing tracks, and pin placement">
+        <text x="20" y="22" class="svgl2">7.5-TRACK CELL TEMPLATE</text>
+        <rect x="60" y="40" width="300" height="22" fill="#5C6B73"/>
+        <text x="180" y="55" class="svgl" fill="#F6F8F7">VDD RAIL</text>
+        <rect x="60" y="196" width="300" height="22" fill="#5C6B73"/>
+        <text x="180" y="211" class="svgl" fill="#F6F8F7">VSS RAIL</text>
+        <rect x="60" y="62" width="300" height="134" fill="#EDF1EF" stroke="#DFE5E2"/>
+        <line x1="60" y1="85" x2="360" y2="85" stroke="#B87333" stroke-width="3" opacity="0.55"/>
+        <line x1="60" y1="110" x2="360" y2="110" stroke="#B87333" stroke-width="3" opacity="0.55"/>
+        <line x1="60" y1="135" x2="360" y2="135" stroke="#B87333" stroke-width="3" opacity="0.55"/>
+        <line x1="60" y1="160" x2="360" y2="160" stroke="#B87333" stroke-width="3" opacity="0.55"/>
+        <text x="210" y="182" class="svgl" text-anchor="middle">M2 routing tracks</text>
+        <rect x="130" y="103" width="14" height="14" fill="#A65E2E"/>
+        <text x="126" y="98" class="svgl2">A</text>
+        <rect x="220" y="128" width="14" height="14" fill="#A65E2E"/>
+        <text x="216" y="123" class="svgl2">B</text>
+        <rect x="300" y="153" width="14" height="14" fill="#8A4A20"/>
+        <text x="296" y="148" class="svgl2">Y</text>
+        <text x="210" y="240" class="svgl" text-anchor="middle">DRC · LVS · PEX clean</text>
+      </svg>
+      <figcaption>Cell template: power rails, M2 pin grid, and the abutment constraints layout must satisfy.</figcaption>
+    </figure>
+    <h3> My Work </h3>
+    <p>Designed an assigned standard cell end-to-end in Virtuoso: schematic sized from the library CDL, symbol export, and layout on the exact 7.5-track architecture with all pins on distinct M2 routing tracks. Ran Calibre DRC and LVS to clean signoff, parasitic extraction with xACT 3D, and post-layout HSPICE simulation against an FO4 load while quantifying the delay penalty parasitics add over the pre-layout netlist. Verified abutment robustness with a 3×3 mirrored-array DRC (clean except the expected latch-up flag without tap cells).</p>
+    <h3> Demonstration </h3>
+    <p>Working command of the custom-layout toolchain: Virtuoso, Calibre rule decks, extraction flows and the discipline library work demands: grid snapping, pin-access planning, and treating DRC/LVS not as a final hurdle but as part of the design loop.</p>
+  </section>
+
+  <section class="detail" id="detail-l03" hidden>
+    <a class="back" href="#vlsi">← Back to overview</a>
+    <span class="eyebrow" style="display:block;margin-top:22px">V.03 · VLSI Design · ASAP7 7 nm</span>
+    <h2>RTL-to-GDS: Synthesis &amp; Place-and-Route</h2>
+    <p class="lede">The complete digital implementation flow, run end to end — behavioral RTL in, DRC-clean layout out, closed at a 2 GHz clock.</p>
+    <figure class="dfig" style="max-width:640px">
+      <svg viewBox="0 0 560 150" role="img" aria-label="RTL to GDS flow: Verilog and VCS, Design Compiler synthesis, Innovus place and route, GDS signoff">
+        <text x="18" y="22" class="svgl2">RTL → GDS FLOW</text>
+        <rect x="18" y="44" width="116" height="54" rx="4" fill="#F1E7DF" stroke="#A65E2E" stroke-width="1.6"/>
+        <text x="76" y="68" class="svgl2" text-anchor="middle">RTL</text>
+        <text x="76" y="86" class="svgl" text-anchor="middle">Verilog · VCS</text>
+        <text x="144" y="76" class="svgl">→</text>
+        <rect x="154" y="44" width="116" height="54" rx="4" fill="#FFFFFF" stroke="#5C6B73" stroke-width="1.4"/>
+        <text x="212" y="68" class="svgl2" text-anchor="middle">Synthesis</text>
+        <text x="212" y="86" class="svgl" text-anchor="middle">DC · timing</text>
+        <text x="280" y="76" class="svgl">→</text>
+        <rect x="290" y="44" width="116" height="54" rx="4" fill="#FFFFFF" stroke="#5C6B73" stroke-width="1.4"/>
+        <text x="348" y="68" class="svgl2" text-anchor="middle">APR</text>
+        <text x="348" y="86" class="svgl" text-anchor="middle">Innovus · CTS</text>
+        <text x="416" y="76" class="svgl">→</text>
+        <rect x="426" y="44" width="116" height="54" rx="4" fill="#FFFFFF" stroke="#5C6B73" stroke-width="1.4"/>
+        <text x="484" y="68" class="svgl2" text-anchor="middle">Signoff</text>
+        <text x="484" y="86" class="svgl" text-anchor="middle">GDS · DRC</text>
+        <text x="280" y="128" class="svgl" text-anchor="middle">Every netlist re-verified · closed at 2 GHz</text>
+      </svg>
+      <figcaption>Each stage's output netlist re-simulated before moving forward — no silent breakage.</figcaption>
+    </figure>
+    <h3>My work </h3>
+    <p>Implemented a registered 2-bit adder (I/O flip-flops at the module boundary) and carried it through the full flow: behavioral verification in VCS/DVE, Design Compiler synthesis to the ASAP7 standard-cell library at a 500 ps clock period (2 GHz), and Innovus APR — floorplanning, power stripes, clock-tree synthesis, routing — with post-route setup and hold timing reports and connectivity/DRC verification. Exported GDS, imported into Virtuoso, and closed physical DRC on the final layout. Re-ran the same testbench on the post-synthesis and post-APR netlists with back-annotated standard-cell models at every stage.</p>
+    
+  </section>
+
+  <section class="detail" id="detail-l04" hidden>
+    <a class="back" href="#vlsi">← Back to overview</a>
+    <span class="eyebrow" style="display:block;margin-top:22px">V.04 · VLSI Design · ASAP7 7 nm</span>
+    <h2>GCN Hardware Accelerator</h2>
+    <p class="lede">A graph-convolutional-network ASIC — sparse aggregation, dense matrix multiply, and argmax classification — implemented, routed, and optimized for power under a hard latency budget.</p>
+    <figure class="dfig" style="max-width:640px">
+      <svg viewBox="0 0 560 150" role="img" aria-label="GCN accelerator dataflow: sparse aggregation from COO edge lists, MAC transformation, argmax classification, node label output">
+        <text x="18" y="22" class="svgl2">GCN DATAFLOW</text>
+        <rect x="18" y="44" width="116" height="54" rx="4" fill="#F1E7DF" stroke="#A65E2E" stroke-width="1.6"/>
+        <text x="76" y="68" class="svgl2" text-anchor="middle">Aggregate</text>
+        <text x="76" y="86" class="svgl" text-anchor="middle">COO sparse</text>
+        <text x="144" y="76" class="svgl">→</text>
+        <rect x="154" y="44" width="116" height="54" rx="4" fill="#FFFFFF" stroke="#5C6B73" stroke-width="1.4"/>
+        <text x="212" y="68" class="svgl2" text-anchor="middle">Transform</text>
+        <text x="212" y="86" class="svgl" text-anchor="middle">MAC array</text>
+        <text x="280" y="76" class="svgl">→</text>
+        <rect x="290" y="44" width="116" height="54" rx="4" fill="#FFFFFF" stroke="#5C6B73" stroke-width="1.4"/>
+        <text x="348" y="68" class="svgl2" text-anchor="middle">Argmax</text>
+        <text x="348" y="86" class="svgl" text-anchor="middle">classify</text>
+        <text x="416" y="76" class="svgl">→</text>
+        <rect x="426" y="44" width="116" height="54" rx="4" fill="#FFFFFF" stroke="#5C6B73" stroke-width="1.4"/>
+        <text x="484" y="68" class="svgl2" text-anchor="middle">Output</text>
+        <text x="484" y="86" class="svgl" text-anchor="middle">node labels</text>
+        <text x="280" y="128" class="svgl" text-anchor="middle">Sparse edge lists, not dense matmul · &lt; 100 ns</text>
+      </svg>
+      <figcaption>Sparse-aware design: vector additions driven by COO edge lists instead of dense matrix multiplication.</figcaption>
+    </figure>
+    <h3> My work </h3>
+    <p>Designed a parameterized SystemVerilog GCN module for node classification: decoding a coordinate-format (COO) edge list to perform sparse feature aggregation as vector additions rather than wasteful dense multiplies, a MAC datapath for the 96-feature transformation, and argmax output classification — all behind registered I/O with memory-style read handshaking (<code>enable_read</code>/<code>read_address</code>). Balanced pipeline depth against flip-flop overhead to meet the &lt;100 ns end-to-end latency target, verified behavioral, post-synthesis, and post-APR netlists against golden outputs, and closed the design in Innovus with VCD-driven average-power analysis for the low-power optimization ranking.</p>
+   
+  </section>
+
+  </main>
+
+  <footer id="contact">
+    <div class="foot">
+      <div>
+        <span class="eyebrow">Contact</span>
+        <p style="margin:10px 0 0"><a class="email" href="mailto:aurick2023@gmail.com">aurick2023@gmail.com</a></p>
+        <p class="loc">Tempe, Arizona</p>
+      </div>
+      <nav aria-label="External links">
+        <a href="https://github.com/Aurick165" target="_blank" rel="noreferrer">GitHub ↗</a>
+        <a href="https://linkedin.com/in/aurick-das-92582a176/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+        <a href="https://sites.google.com/view/auricktest165" target="_blank" rel="noreferrer">Google Sites ↗</a>
+      </nav>
+    </div>
+    <p class="fine">© 2026 Aurick Das · Tempe, AZ</p>
+  </footer>
+
+</div>
+
+<script>
+  // Analyzer-style grid lines
+  (function () {
+    var g = document.querySelector(".gridlines");
+    [70, 140, 210, 280, 350].forEach(function (p) {
+      ["v", "h"].forEach(function (dir) {
+        var l = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        if (dir === "v") { l.setAttribute("x1", p); l.setAttribute("y1", 30); l.setAttribute("x2", p); l.setAttribute("y2", 390); }
+        else { l.setAttribute("x1", 30); l.setAttribute("y1", p); l.setAttribute("x2", 390); l.setAttribute("y2", p); }
+        l.setAttribute("class", "grid");
+        g.appendChild(l);
+      });
+    });
+    // Draw the hysteresis branches on load
+    requestAnimationFrame(function () {
+      setTimeout(function () {
+        document.getElementById("setBranch").classList.add("drawn");
+        document.getElementById("resetBranch").classList.add("drawn");
+      }, 150);
+    });
+  })();
+
+  // Research detail routing: #r01/#r02/#r03 show a detail view, anything else shows home
+  (function () {
+    var home = document.getElementById("home");
+    var details = document.querySelectorAll(".detail");
+    function route() {
+      var h = location.hash.replace("#", "");
+      var target = document.getElementById("detail-" + h);
+      details.forEach(function (d) { d.hidden = true; });
+      if (target) {
+        home.hidden = true;
+        target.hidden = false;
+        window.scrollTo(0, 0);
+      } else {
+        home.hidden = false;
+      }
+    }
+    window.addEventListener("hashchange", route);
+    route();
+  })();
+</script>
+</body>
+</html>
