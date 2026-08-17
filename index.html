@@ -275,14 +275,14 @@
         <a class="card" href="#l03">
           <span class="id">V.03</span>
           <h3>RTL-to-GDS: Synthesis &amp; APR</h3>
-          <p>Pipelined adder taken through the complete digital flow — VCS verification, Design Compiler synthesis, Innovus place-and-route with CTS at a 2 GHz clock, GDS export, and DRC in Virtuoso.</p>
+          <p>Pipelined adder taken through the complete digital flow --> VCS verification, Design Compiler synthesis, Innovus place-and-route with CTS at a 2 GHz clock, GDS export, and DRC in Virtuoso.</p>
           <span class="tag">DC · Innovus · VCS · 2 GHz</span>
           <span class="more">Read details →</span>
         </a>
         <a class="card" href="#l04">
           <span class="id">V.04</span>
           <h3>GCN Hardware Accelerator</h3>
-          <p>Graph-convolutional-network ASIC in SystemVerilog — sparse COO-format aggregation, matrix-multiply datapath, argmax classification — synthesized and routed under a 100 ns latency budget with Innovus power analysis.</p>
+          <p>Graph-convolutional-network ASIC in SystemVerilog —-> sparse COO-format aggregation, matrix-multiply datapath, argmax classification — synthesized and routed under a 100 ns latency budget with Innovus power analysis.</p>
           <span class="tag">SystemVerilog · sparse MVM · low power</span>
           <span class="more">Read details →</span>
         </a>
@@ -609,10 +609,10 @@
       </svg>
       <figcaption>Subthreshold I–V: slope extraction across device flavors and temperature.</figcaption>
     </figure>
-    <h3>What I did</h3>
-    <p>Characterized all four ASAP7 FinFET flavors — SLVT, LVT, RVT, and SRAM, NMOS and PMOS — in HSPICE across −40 °C, 25 °C, and 120 °C. Extracted subthreshold swing and constant-current threshold voltage with scripted <code>.measure</code> commands, validated against hand calculations from waveform (x, y) markers in WaveViewer, and measured effective drive current (I<sub>EFF</sub>) using the dual-transistor I<sub>H</sub>/I<sub>L</sub> method. Computed fin counts from effective-width geometry (W<sub>eff</sub> = N·(2h<sub>fin</sub> + w<sub>fin</sub>)).</p>
-    <h3>What it demonstrates</h3>
-    <p>Fluency in device-level SPICE methodology: measurement automation rather than cursor-reading, cross-checking simulated extractions against first-principles calculations, and connecting V<sub>T</sub>/SS/leakage trade-offs to real design choices — why SLVT burns leakage for speed on critical paths while RVT carries the bulk of a design.</p>
+    <h3>My Work </h3>
+    <p>Characterized all four ASAP7 FinFET Devices : SLVT, LVT, RVT, and SRAM, NMOS and PMOS — in HSPICE across −40 °C, 25 °C, and 120 °C. Extracted subthreshold swing and constant-current threshold voltage with scripted <code>.measure</code> commands, validated against hand calculations from waveform in WaveViewer, and measured effective drive current (I<sub>EFF</sub>) using the dual-transistor I<sub>H</sub>/I<sub>L</sub> method. Computed fin counts from effective-width geometry (W<sub>eff</sub> = N·(2h<sub>fin</sub> + w<sub>fin</sub>)).</p>
+    <h3> Demonstration </h3>
+    <p>Fluency in device-level SPICE methodology: measurement automation rather than cursor-reading, cross-checking simulated extractions against first-principles calculations, and connecting V<sub>T</sub>/SS/leakage trade-offs to real design choices like why SLVT burns leakage for speed on critical paths while RVT carries the bulk of a design.</p>
   </section>
 
   <section class="detail" id="detail-l02" hidden>
@@ -643,10 +643,10 @@
       </svg>
       <figcaption>Cell template: power rails, M2 pin grid, and the abutment constraints layout must satisfy.</figcaption>
     </figure>
-    <h3>What I did</h3>
-    <p>Designed an assigned standard cell end-to-end in Virtuoso: schematic sized from the library CDL, symbol export, and layout on the exact 7.5-track architecture with all pins on distinct M2 routing tracks. Ran Calibre DRC and LVS to clean signoff, parasitic extraction with xACT 3D, and post-layout HSPICE simulation against an FO4 load — quantifying the delay penalty parasitics add over the pre-layout netlist. Verified abutment robustness with a 3×3 mirrored-array DRC (clean except the expected latch-up flag without tap cells).</p>
-    <h3>What it demonstrates</h3>
-    <p>Working command of the custom-layout toolchain — Virtuoso, Calibre rule decks, extraction flows — and the discipline library work demands: grid snapping, pin-access planning, and treating DRC/LVS not as a final hurdle but as part of the design loop.</p>
+    <h3> My Work </h3>
+    <p>Designed an assigned standard cell end-to-end in Virtuoso: schematic sized from the library CDL, symbol export, and layout on the exact 7.5-track architecture with all pins on distinct M2 routing tracks. Ran Calibre DRC and LVS to clean signoff, parasitic extraction with xACT 3D, and post-layout HSPICE simulation against an FO4 load while quantifying the delay penalty parasitics add over the pre-layout netlist. Verified abutment robustness with a 3×3 mirrored-array DRC (clean except the expected latch-up flag without tap cells).</p>
+    <h3> Demonstration </h3>
+    <p>Working command of the custom-layout toolchain: Virtuoso, Calibre rule decks, extraction flows and the discipline library work demands: grid snapping, pin-access planning, and treating DRC/LVS not as a final hurdle but as part of the design loop.</p>
   </section>
 
   <section class="detail" id="detail-l03" hidden>
@@ -673,10 +673,9 @@
       </svg>
       <figcaption>Each stage's output netlist re-simulated before moving forward — no silent breakage.</figcaption>
     </figure>
-    <h3>What I did</h3>
+    <h3>My work </h3>
     <p>Implemented a registered 2-bit adder (I/O flip-flops at the module boundary) and carried it through the full flow: behavioral verification in VCS/DVE, Design Compiler synthesis to the ASAP7 standard-cell library at a 500 ps clock period (2 GHz), and Innovus APR — floorplanning, power stripes, clock-tree synthesis, routing — with post-route setup and hold timing reports and connectivity/DRC verification. Exported GDS, imported into Virtuoso, and closed physical DRC on the final layout. Re-ran the same testbench on the post-synthesis and post-APR netlists with back-annotated standard-cell models at every stage.</p>
-    <h3>What it demonstrates</h3>
-    <p>That I can drive the industry-standard Synopsys/Cadence implementation stack myself — write the Tcl, read the timing reports, chase the violations — not just describe the flow in the abstract.</p>
+    
   </section>
 
   <section class="detail" id="detail-l04" hidden>
@@ -702,10 +701,9 @@
       </svg>
       <figcaption>Sparse-aware design: vector additions driven by COO edge lists instead of dense matrix multiplication.</figcaption>
     </figure>
-    <h3>What I did</h3>
+    <h3> My work </h3>
     <p>Designed a parameterized SystemVerilog GCN module for node classification: decoding a coordinate-format (COO) edge list to perform sparse feature aggregation as vector additions rather than wasteful dense multiplies, a MAC datapath for the 96-feature transformation, and argmax output classification — all behind registered I/O with memory-style read handshaking (<code>enable_read</code>/<code>read_address</code>). Balanced pipeline depth against flip-flop overhead to meet the &lt;100 ns end-to-end latency target, verified behavioral, post-synthesis, and post-APR netlists against golden outputs, and closed the design in Innovus with VCD-driven average-power analysis for the low-power optimization ranking.</p>
-    <h3>What it demonstrates</h3>
-    <p>Architecture-level judgment, not just tool driving: exploiting sparsity in the algorithm, reasoning about the pipelining/power/throughput triangle, and connecting a workload — graph neural networks — to silicon constraints. It's the digital-design counterpart to my analog in-memory computing research, where the same matrix-vector multiplication is instead computed by device physics.</p>
+   
   </section>
 
   </main>
